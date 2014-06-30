@@ -1,0 +1,85 @@
+%% This BibTeX bibliography file was created using BibDesk.
+%% http://bibdesk.sourceforge.net/
+
+
+%% Created for kmorel at 2014-06-30 13:01:52 -0600 
+
+
+%% Saved with string encoding Unicode (UTF-8) 
+
+
+
+@book{Quinn2004,
+	Annote = {A book containing mostly practical algorithms and their implementations using MPI and OpenMP.  The book also contains what I think is a nice review of some of the basic theory of parallel computing including Amdahl's law, Gustafson-Barsis's law, the Karp-Flatt metric, and the Isoefficiency metric.},
+	Author = {Michael J. Quinn},
+	Date-Added = {2014-06-30 19:01:50 +0000},
+	Date-Modified = {2014-06-30 19:01:50 +0000},
+	Note = {{ISBN}~978-0-07-282256-4},
+	Publisher = {McGraw-Hill},
+	Title = {Parallel Programming in C with MPI and OpenMP},
+	Year = {2004}}
+
+@article{Grama1993,
+	Abstract = {Isoefficiency analysis helps us determine the best algorithm/architecture combination for a particular problem without explicitly analyzing all possible combinations under all possible conditions.},
+	Annote = {Introduces an isoefficiency metric that determines how much you have to increase a problem size to maintain the same efficiency for a larger problem.
+
+Summarized in [Quinn2004].
+},
+	Author = {Ananth Y. Grama and Anshul Gupta and Vipin Kuma},
+	Date-Added = {2014-06-30 18:57:53 +0000},
+	Date-Modified = {2014-06-30 18:57:53 +0000},
+	Journal = {IEEE Parallel \& Distributed Technology: Systems \& Applications},
+	Month = {August},
+	Note = {{DOI}~10.1109/88.242438},
+	Number = {3},
+	Pages = {12--21},
+	Title = {Isoefficiency: Measuring the Scalability of Parallel Algorithms and Architectures},
+	Volume = {1},
+	Year = {1993},
+	Bdsk-Url-1 = {http://dx.doi.org/10.1109/88.242438}}
+
+@article{Gustafson1988,
+	Annote = {A paper by Gustafson describing how efficient parallel processing can be achieved by scalling up the size of the problem with the amount of parallelism.  This is in contrast to Amdahl's law, which limits the amount of speedup that can be achieved.  Provides the equation that is now known as Gustafson's law (or Gustafson-Barsis's law).},
+	Author = {John L. Gustafson},
+	Date-Added = {2014-06-30 18:26:15 +0000},
+	Date-Modified = {2014-06-30 18:26:15 +0000},
+	Journal = {Communications of the ACM},
+	Month = {May},
+	Note = {{DOI}~10.1145/42411.42415},
+	Number = {5},
+	Pages = {532--533},
+	Title = {Reevaluating {Amdahl's} Law},
+	Volume = {31},
+	Year = {1988},
+	Bdsk-Url-1 = {http://dx.doi.org/10.1145/42411.42415}}
+
+@inproceedings{Amdahl1967,
+	Annote = {Amdahl's original (?) short paper describing the limitations of amount of increased speedup you get with parallel computing.  I note that the equation now associated with Amdahl's law is not given here.},
+	Author = {Gene M. Amdahl},
+	Booktitle = {Proceedings of the Spring Joint Computer Conference (AFIPS '67)},
+	Date-Added = {2014-06-30 18:14:06 +0000},
+	Date-Modified = {2014-06-30 18:14:06 +0000},
+	Month = {April},
+	Note = {{DOI}~10.1145/1465482.1465560},
+	Pages = {483--485},
+	Title = {Validity of the single processor approach to achieving large scale computing capabilities},
+	Year = {1967},
+	Bdsk-Url-1 = {http://dx.doi.org/10.1145/1465482.1465560}}
+
+@article{Faber1986,
+	Annote = {Paper demonstrating that in theory no parallel algorithm can have better than linear performance. The short (and in retrospect obvious) proof is that if a parallel algorithm has a speedup greater than p (the number of processing elements), then you could make a serial algorithm that ran the instructions for each of the p processing elements in sequence, and that would take p times the time of the serial algorithm, which would result in a speedup of p.
+
+Of course, in practice it is possible to get superlinear speedup if the problem fits better in smaller parallel units.
+},
+	Author = {V Faber and Olaf M. Lubeck and Andrew B. {White Jr.}},
+	Date-Added = {2014-06-30 18:02:38 +0000},
+	Date-Modified = {2014-06-30 18:02:38 +0000},
+	Journal = {Parallel Computing},
+	Month = {July},
+	Note = {{DOI}~10.1016/0167-8191(86)90024-4},
+	Number = {3},
+	Pages = {259--260},
+	Title = {Superlinear speedup of an efficient sequential algorithm is not possible},
+	Volume = {3},
+	Year = {1986},
+	Bdsk-Url-1 = {http://dx.doi.org/10.1016/0167-8191(86)90024-4}}

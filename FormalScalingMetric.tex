@@ -139,8 +139,59 @@ unify strong and weak scaling studies.
 \section{Introduction}
 
 \noindent
+The theory of parallel performance is well studied and often used in
+practice, yet all our current models are limited by their reliance on
+serial behavior.
 
 \subsection{Performance Analysis Theory}
+
+\noindent
+The \keyterm{speedup} of a parallel algorithm is defined as
+\begin{equation}
+  S(n,p) = \frac{T^*(n)}{T(n,p)}
+  \label{eq:speedup}
+\end{equation}
+where $T(n,p)$ is the time it takes to run the parallel algorithm on $p$
+processing elements with an input of size $n$ and $T^*(n)$ the time for the
+best serial algorithm on the same input. The best possible serial algorithm
+may be different than the parallel algorithm although using the same
+algorithm is also common practice.
+
+In theory the best possible speedup achievable\lcite{Faber1986} is $S(n,p)
+= p$ (although in practice superlinear measurements are possible). Thus, we
+measure the \keyterm{efficiency} as the ratio of the observed speedup to
+the ideal speedup.
+\begin{equation}
+  E(n,p) = \frac{S(n,p)}{p} = \frac{T^*(n)}{p \; T(n,p)}
+  \label{eq:efficiency}
+\end{equation}
+
+Amdahl\lcite{Amdahl1967} famously observes the limits of scaling any
+parallel algorithm based on the computation fraction $f$ that exists in any
+algorithm that is inherently serial. The equation derived from this
+observation is known as \keyterm{Amdahl's Law}.
+\begin{equation}
+  S(n,p) \leq \frac{1}{f + (1-f)/p}
+  \label{eq:Amdahl}
+\end{equation}
+
+Gustafson\lcite{Gustafson1988} observes that the serail fraction tends to
+go down for larger data sizes in parallel algorithms, which justifies the
+use of parallel computing for large problems. The Gustafson-Barsis law
+reformulates speedup in terms of the parallel execution rather than the
+serial execution
+\begin{equation}
+  S(n,p) \leq p + f(1-p)
+  \label{eq:GustafsonBarsis}
+\end{equation}
+This law shows that speedup can be increased indefinitely as
+long as the serial fraction drops commensurately with the processing
+element increase. Grama \etal\lcite{Grama1993} introduce an
+\keyterm{isoefficiency} metric that determines how much a problem needs to
+grow to maintain linear speedup.
+
+Performance analysis theory is reviewed in much more detail in many
+parallel computing textbooks such as Quinn's\lcite{Quinn2004}.
 
 \subsection{Limitations of Performance Analysis}
 
@@ -154,8 +205,8 @@ operated by Sandia Corporation, a wholly owned subsidiary of Lockheed
 Martin Corporation, for the U.S. Department of Energy's National Nuclear
 Security Administration under contract DE-AC04-94AL85000.
 
-\bibliographystyle{IEEETransS}
-\bibliography{}
+\bibliographystyle{IEEETranS}
+\bibliography{FormalScalingMetric}
 
 \end{document}
 
