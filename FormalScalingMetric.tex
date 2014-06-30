@@ -166,34 +166,93 @@ the ideal speedup.
   \label{eq:efficiency}
 \end{equation}
 
-Amdahl\lcite{Amdahl1967} famously observes the limits of scaling any
+Amdahl\scite{Amdahl1967} famously observes the limits of scaling any
 parallel algorithm based on the computation fraction $f$ that exists in any
 algorithm that is inherently serial. The equation derived from this
-observation is known as \keyterm{Amdahl's Law}.
+observation is known as \keyterm{Amdahl's law}.
 \begin{equation}
   S(n,p) \leq \frac{1}{f + (1-f)/p}
   \label{eq:Amdahl}
 \end{equation}
 
-Gustafson\lcite{Gustafson1988} observes that the serail fraction tends to
+Gustafson\scite{Gustafson1988} observes that the serial fraction tends to
 go down for larger data sizes in parallel algorithms, which justifies the
-use of parallel computing for large problems. The Gustafson-Barsis law
-reformulates speedup in terms of the parallel execution rather than the
-serial execution
+use of parallel computing for large problems. The \keyterm{Gustafson-Barsis
+  law} reformulates speedup in terms of the parallel execution rather than
+the serial execution
 \begin{equation}
   S(n,p) \leq p + f(1-p)
   \label{eq:GustafsonBarsis}
 \end{equation}
 This law shows that speedup can be increased indefinitely as
 long as the serial fraction drops commensurately with the processing
-element increase. Grama \etal\lcite{Grama1993} introduce an
+element increase. Grama \etal\scite{Grama1993} introduce an
 \keyterm{isoefficiency} metric that determines how much a problem needs to
 grow to maintain linear speedup.
 
 Performance analysis theory is reviewed in much more detail in many
-parallel computing textbooks such as Quinn's\lcite{Quinn2004}.
+parallel computing textbooks such as Quinn's\scite{Quinn2004}.
 
 \subsection{Limitations of Performance Analysis}
+
+\noindent
+Although our definition for speedup and its derived quantities work well
+for theoretical complexity analysis, they all rely in some way on knowing
+the serial performance. With large-scale simulations today reaching orders
+of billions to trillions of
+elements\lcite{Bernaschi2013,Rossinelli2013,Bussmann2013,Habib2013},
+directly measuring serial performance is impossible. The Gustafson-Barsis
+law needs only the serial fraction, but estimates for serial
+fraction such as the \keyterm{Karp-Flatt} metric\lcite{Karp1990} require
+knowing the serial performance anyway.
+
+Because of this issue, many studies attempt to assess scalability directly
+from an algorithm's running time relative to the number of processing
+elements, which is called \keyterm{strong scaling}\lcite{Kaminsky2014}.
+Because a parallel algorithm with perfect speedup has a running time
+proportional to $1/p$, we look for time behavior that follows a roughly
+hyperbolic plot that asymptotically a number close to zero (representing
+the overhead). However, all but the very worst scaling algorithms tend to
+asymptotically approach some constant time, which makes it difficult to
+distinguish when an algorithm is actually scaling well. Often we try to
+rectify the problem by plotting the running time using log scaling for both
+the number of processing elements and the time because perfect scaling on
+this plot is a straight line. However, overheads of any polynomial order
+are also straight lines, which again makes it difficult to differentiate
+good and bad scaling.
+
+Another common approach is to measure \keyterm{weak scaling}\lcite{Kaminsky2014}.
+In weak scaling the size of the input data is increased with the number of
+processing elements. Typically the input is kept proportional to the number
+of processing elements. In this case a perfectly scaling algorithm will
+have the same running time for all runs. Although an important
+characteristic, weak scaling should also be coupled with strong scaling to
+get a complete picture. Also, analyzing weak scaling this way requires the
+ability to vary the data proportionally with the processing elements, which
+is not always possible.  For example, some simulations might adaptively
+remesh based on some criteria, which means the size of the data can be
+modified but not directly set by an analyst.
+
+Some studies use an ad hoc version of speedup that replaces the
+immeasurable $T^*(n)$ with some arbitrarily chosen measurement, usually the
+time run on the smallest number of processing elements. The problem with
+this approach is that the absolute ``speedup'' values are meaningless and
+any weak scaling comparisons are impossible.
+
+Finally, some studies use rate in terms of the size of input computed per
+unit time rather than absolute run time to assess
+scalability\lcite{Kaminsky2014}. Rate is formally defined as
+\begin{equation}
+  R(n,p) = \frac{n}{T(n,p)}
+\end{equation}
+Some analysts have discovered that rate, being essentially a reciprocal of
+time, provides a much better visual analysis of scaling, and it is
+an essential the mechanism advocated in this position paper.
+
+This paper will establish a realistic definition of speedup and efficiency
+that can be easily measured empirically. Furthermore, we will demonstrate
+how rate can be used as a proxy for speedup and can unify strong and weak
+scaling to provide a more complete analysis.
 
 
 % use section* for acknowledgement
