@@ -53,6 +53,9 @@
 % to have its own page.
 \renewcommand{\floatpagefraction}{.75}
 
+% Allows multiline equations (align environment) to break across pages.
+\allowdisplaybreaks[4]
+
 \newenvironment{packed_itemize}{
   \begin{itemize}[noitemsep]
 }{
@@ -313,7 +316,7 @@ The important feature of cost per unit is that under perfect scaling the
 cost per unit is constant under any number of processing elements \emph{or}
 data sizes. Thus, given multiple strong scaling studies over data of
 different sizes, we can find the best (minimal) cost per unit $C_{/u}^*$
-using $p*$ processing elements and with data of size $n^*$. With this best
+using $p^*$ processing elements and with data of size $n^*$. With this best
 cost per unit we can adjusted to be comparable across all possible
 configurations.
 \begin{equation}
@@ -324,6 +327,58 @@ configurations.
 With this definition of efficiency we can combine strong and weak scaling
 studies into one unified analysis. \fix{Does this need to be explained
   more?}
+
+
+\section{Rate as a Proxy for Speedup}
+\label{sec:RateProxy}
+
+Both efficiency and speedup are good metrics for parallel performance
+analysis. However, many analysts prefer using speedup, particularly for
+visual (chart) analysis. This is because good scaling shows an upward
+sloping speedup as jobs get larger whereas even a good scaling algorithm
+will show a gradual drop-off from a perfect efficiency of 1.
+
+Although there is no way to compute the speedup at large scales, we can
+show that rate (Equation~\ref{eq:Rate}) is a valid proxy for speedup. If we
+substitute rate for time in Equation~\ref{eq:Speedup}, we get the
+following.
+\begin{equation}
+  S(n,p) = \frac{T^*(n)}{T(n,p)} = \frac{T^*(n)}{n} R(n,p)
+  \label{eq:SpeedupFromRate}
+\end{equation}
+
+We can observe that for a given problem size (i.e. $n$ held constant) the
+speedup is proportional to the rate. This means that the rate curve will
+have the exact same shape as the speedup curve, and visually they will be
+identical with the appropriate scaling of the ordinate axis.
+
+For a proper parallel performance analysis we need to compare our measured
+metrics with the ideal metrics. These ideal values are implicit in the
+definition of efficiency ($E_\mathrm{ideal}(n,p) = 1$) and speedup
+($S_\mathrm{ideal}(n,p) = p$). The ideal rate is dependent on the measured
+best cost per unit and can be derived from
+Equation~\ref{eq:EfficiencyCostPerUnit}.
+\begingroup
+\addtolength{\jot}{1ex} % Space equations a bit more. Fractions are cluttered.
+\begin{align}
+  \frac{C_{/u}^*}{C_{/u}(n,p)} &= E(n,p) \nonumber \\
+  C_{/u}^* \frac{n}{p \; T(n,p)} &= E(n,p) \nonumber \\
+  \frac{C_{/u}^*}{p} R(n,p) &= E(n,p) \nonumber \\
+  \frac{C_{/u}^*}{p} R_\mathrm{ideal}(n,p) &= 1 \nonumber \\
+  R_\mathrm{ideal}(n,p) &= p \frac{1}{C_{/u}^*}
+\end{align}
+\endgroup
+
+Note that the curve for $R_\mathrm{ideal}(n,p)$ is independent of $n$,
+which means we can use rate for both strong and weak scaling analysis.
+
+
+\section{Example}
+
+
+\section{Discussion}
+
+Future work incorporating power in cost\lcite{Cameron2012}?
 
 
 % use section* for acknowledgement
