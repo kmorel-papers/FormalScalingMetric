@@ -149,7 +149,7 @@ serial behavior.
 The \keyterm{speedup} of a parallel algorithm is defined as
 \begin{equation}
   S(n,p) = \frac{T^*(n)}{T(n,p)}
-  \label{eq:speedup}
+  \label{eq:Speedup}
 \end{equation}
 where $T(n,p)$ is the time it takes to run the parallel algorithm on $p$
 processing elements with an input of size $n$ and $T^*(n)$ the time for the
@@ -163,7 +163,7 @@ measure the \keyterm{efficiency} as the ratio of the observed speedup to
 the ideal speedup.
 \begin{equation}
   E(n,p) = \frac{S(n,p)}{p} = \frac{T^*(n)}{p \; T(n,p)}
-  \label{eq:efficiency}
+  \label{eq:Efficiency}
 \end{equation}
 
 Amdahl\scite{Amdahl1967} famously observes the limits of scaling any
@@ -244,6 +244,7 @@ unit time rather than absolute run time to assess
 scalability\lcite{Kaminsky2014}. Rate is formally defined as
 \begin{equation}
   R(n,p) = \frac{n}{T(n,p)}
+  \label{eq:Rate}
 \end{equation}
 Some analysts have discovered that rate, being essentially a reciprocal of
 time, provides a much better visual analysis of scaling, and it is
@@ -265,7 +266,7 @@ intuitively the number of processing elements used multiplied by the amount
 of time they are used.
 \begin{equation}
   C(n,p) = p \; T(n,p)
-  \label{eq:cost}
+  \label{eq:Cost}
 \end{equation}
 Cost is sometimes used in theoretical algorithm analysis\lcite{JaJa1992}
 and is often used for HPC allocations, which are typically measured in
@@ -281,16 +282,48 @@ best cost we can redefine efficiency as the ratio of this best cost to the
 actual cost.
 \begin{equation}
   E(n,p) = \frac{C^*(n)}{C(n,p)}
-  \label{eq:efficiency_cost}
+  \label{eq:EfficiencyCost}
 \end{equation}
 
 If we make the typical assumptions that the minimal cost is when the serial
 algorithm is run ($C^*(n) = T^*(n)$), then we observe that
-Equation~\ref{eq:efficiency_cost} simplifies to
-Equation~\ref{eq:efficiency}, making this definition of efficiency
+Equation~\ref{eq:EfficiencyCost} simplifies to
+Equation~\ref{eq:Efficiency}, making this definition of efficiency
 equivalent but broader than the traditional definition. And unlike the
 traditional definition of efficiency, determining efficiency from cost is
 straightforward at large scales.
+
+
+\section{Strong and Weak Scaling with Cost Per Unit}
+\label{sec:CostPerUnit}
+
+\noindent
+Our previous definition of efficiency (Equation~\ref{eq:EfficiencyCost})
+works well for strong scaling where the data size is constant, but cannot
+be compared across different data sizes for weak scaling. To describe
+efficiency under weak scaling we define the new metric \keyterm{cost per
+  unit}, $C_{/u}$. Cost per unit is the amortized computational cost for
+one unit of data.
+\begin{equation}
+  C_{/u}(n,p) = \frac{C(n,p)}{n} = \frac{p \; T(n,p)}{n}
+  \label{eq:CostPerUnit}
+\end{equation}
+
+The important feature of cost per unit is that under perfect scaling the
+cost per unit is constant under any number of processing elements \emph{or}
+data sizes. Thus, given multiple strong scaling studies over data of
+different sizes, we can find the best (minimal) cost per unit $C_{/u}^*$
+using $p*$ processing elements and with data of size $n^*$. With this best
+cost per unit we can adjusted to be comparable across all possible
+configurations.
+\begin{equation}
+  E(n,p) = \frac{C_{/u}^*}{C_{/u}(n,p)}
+  \label{eq:EfficiencyCostPerUnit}
+\end{equation}
+
+With this definition of efficiency we can combine strong and weak scaling
+studies into one unified analysis. \fix{Does this need to be explained
+  more?}
 
 
 % use section* for acknowledgement
