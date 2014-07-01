@@ -255,6 +255,44 @@ how rate can be used as a proxy for speedup and can unify strong and weak
 scaling to provide a more complete analysis.
 
 
+\section{Deriving Efficiency from Cost Analysis}
+\label{sec:CostAnalysis}
+
+\noindent
+In this section we will use \keyterm{cost}, a metric that is simple to
+measure, to define efficiency in lieu of the immeasurable speedup. Cost is
+intuitively the number of processing elements used multiplied by the amount
+of time they are used.
+\begin{equation}
+  C(n,p) = p \; T(n,p)
+  \label{eq:cost}
+\end{equation}
+Cost is sometimes used in theoretical algorithm analysis\lcite{JaJa1992}
+and is often used for HPC allocations, which are typically measured in
+core-hours.
+
+Clearly the most efficient algorithm will be the one that costs the least
+to run. Although we expect the cost to go up with the problem size, a
+perfectly scaled algorithm will cost the same regardless of how many
+processors are used. That is, adding processors the reduces time. Given a
+strong scaling study on a problem of a particular size, we can identify the
+best (minimal) cost, $C^*(n)$ using $p^*$ processing elements. With this
+best cost we can redefine efficiency as the ratio of this best cost to the
+actual cost.
+\begin{equation}
+  E(n,p) = \frac{C^*(n)}{C(n,p)}
+  \label{eq:efficiency_cost}
+\end{equation}
+
+If we make the typical assumptions that the minimal cost is when the serial
+algorithm is run ($C^*(n) = T^*(n)$), then we observe that
+Equation~\ref{eq:efficiency_cost} simplifies to
+Equation~\ref{eq:efficiency}, making this definition of efficiency
+equivalent but broader than the traditional definition. And unlike the
+traditional definition of efficiency, determining efficiency from cost is
+straightforward at large scales.
+
+
 % use section* for acknowledgement
 \section*{Acknowledgment}
 
