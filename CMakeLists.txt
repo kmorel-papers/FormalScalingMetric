@@ -4,7 +4,15 @@ project(FormalScalingMetric NONE)
 
 include(UseLATEX.cmake)
 
+set(image_src
+  images/HabibTime.pdf
+  images/HabibTimePerParticle.pdf
+  images/HabibRate.pdf
+  images/HabibEfficiency.pdf
+  )
+
 add_latex_document(FormalScalingMetric.tex
   BIBFILES FormalScalingMetric.bib
+  IMAGES ${image_src}
   DEFAULT_PDF
   )

@@ -98,6 +98,11 @@
   \IEEEauthorblockA{
     Sandia National Laboratories\\
     Email: kmorel@sandia.gov}
+  \and
+  \IEEEauthorblockN{Ron Oldfield}
+  \IEEEauthorblockA{
+    Sandia National Laboratories\\
+    Email: raoldfi@sandia.gov}
 }
 
 % conference papers do not typically use \thanks and this command
@@ -329,6 +334,30 @@ studies into one unified analysis. \fix{Does this need to be explained
   more?}
 
 
+\begin{figure*}
+  \includegraphics[width=.5\linewidth]{images/HabibTime}%
+  \includegraphics[width=.5\linewidth]{images/HabibTimePerParticle}
+  \caption{Data from the Habib \etal\scite{Habib2013} Gordon Bell
+    finalist. The left chart shows the data using a traditional time
+    metric. The right chart replicates the presentation of Figure~3 in the
+    original Habib \etal paper using an ad hoc metric and a log-log
+    scale. Both charts present the data in a way to suggest near perfect
+    scaling for both scaling studies.}
+  \label{fig:HabibTraditional}
+\end{figure*}
+
+\begin{figure*}
+  \includegraphics[width=.5\linewidth]{images/HabibRate}%
+  \includegraphics[width=.5\linewidth]{images/HabibEfficiency}
+  \caption{Data from the Habib \etal\scite{Habib2013} Gordon Bell finalist
+    using the rate (left) and efficiency (right) metrics advocated in this
+    paper. These plots give a more realistic and visually measurable
+    representation of scaling than the charts in
+    Figure~\ref{fig:HabibTraditional}.}
+  \label{fig:HabibBetter}
+\end{figure*}
+
+
 \section{Rate as a Proxy for Speedup}
 \label{sec:RateProxy}
 
@@ -375,8 +404,57 @@ which means we can use rate for both strong and weak scaling analysis.
 
 \section{Example}
 
+\noindent
+In the previous sections we provided mathematical derivations to show how
+to use rate as a proxy for speedup and to use cost per unit to find the
+efficiency and ideal rate across all scales. In this section we demonstrate
+using these metrics on real measured data.
+
+\subsection{Gordon Bell Finalist}
+
+\noindent
+Our first data set comes a study by Habib \etal\scite{Habib2013}, which is
+one of last year's Gordon Bell finalists. We choose this source because in
+addition to showing impressive scaling, the authors make many measurements
+across many scales and report the results completely enough to extract the
+information and continue analysis. In particular, we look at the
+performance data for scaling the full HACC code on Titan (Section~4.3.2 in
+the original paper).
+
+Figure~\ref{fig:HabibTraditional} shows the performance data from the
+strong and weak scaling studies using a traditional time plot. The curves
+for the data are very similar for what we would expect for perfect scaling:
+a hyperbolic curve for strong scaling and a horizontal line for weak
+scaling. Habib \etal also provide an ad hoc metric of time over data size
+to unify the curve shape of the two plots, which is also replicated in
+Figure~\ref{fig:HabibTraditional}. Again, both curves appear close to
+perfect.
+
+Figure~\ref{fig:HabibBetter} shows the same data using the rate and
+efficiency metrics advocated in this paper. The weak scaling is shown to
+scale off by a measurable fractions, which is to be expected when scaling
+over 3 orders of magnitude. The strong scaling study is shown to diverge
+very far from ideal.
+
+Please note that it is not our intention to criticize the scaling shown by
+Habib \etal\scite{Habib2013}. On the contrary, they show HACC to be world
+class in scalability and demonstrate a consistent efficiency while scaling
+the problem by an order of magnitude. Rather, our intention is to present
+these data in a more informative and honest way. \fix{Could make a comment
+  about being able to use a strong scaling study at a large data scale, but
+  maybe that's not appropriate. Could reference that in the discussion
+  instead.}
+
+\subsection{Imperfect Scaling}
+
+\noindent
+
 
 \section{Discussion}
+
+\noindent
+Final recommendations? No log-log? Many short strong scale studies over
+multiple scales?
 
 Future work incorporating power in cost\lcite{Cameron2012}?
 
