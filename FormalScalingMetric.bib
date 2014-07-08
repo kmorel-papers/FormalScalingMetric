@@ -2,12 +2,37 @@
 %% http://bibdesk.sourceforge.net/
 
 
-%% Created for kmorel at 2014-07-02 15:15:27 -0600 
+%% Created for kmorel at 2014-07-03 17:49:16 -0600 
 
 
 %% Saved with string encoding Unicode (UTF-8) 
 
 
+
+@inproceedings{Oldfield2014,
+	Abstract = {Exascale supercomputing will embody many revolutionary changes in the hardware and software of high-performance computing. For example, projected limitations in power and I/O-system performance will fundamentally change visualization and analysis workflows. A traditional post-processing workflow involves storing simulation results to disk and later retrieving them for visualization and data analysis; however, at Exascale, post-processing approaches will not be able to capture the volume or granularity of data necessary for analysis of these extreme-scale simulations. As an alternative, researchers are exploring ways to integrate analysis and simulation without using the storage system. In situ and in transit are two options, but there has not been an adequate evaluation of these approaches to identify strengths, weaknesses, and trade-offs at large scale. This paper provides a detailed performance and scaling analysis of a large-scale shock physics code using traditional post-processsing, in situ, and in transit analysis to detect material fragments from a simulated explosion.},
+	Annote = {Follow up paper for the studies given in the technical report of [Rogers2013].},
+	Author = {Ron A. Oldfield and Kenneth Moreland and Nathan Fabian and David Rogers},
+	Booktitle = {Proceedings of the 28th ACM international Conference on Supercomputing (ICS '14)},
+	Date-Added = {2014-07-03 23:49:14 +0000},
+	Date-Modified = {2014-07-03 23:49:14 +0000},
+	Month = {June},
+	Note = {{DOI}~10.1145/2597652.2597668},
+	Pages = {83--92},
+	Title = {Evaluation of Methods to Integrate Analysis into a Large-Scale Shock Physics Code},
+	Year = {2014},
+	Bdsk-Url-1 = {http://dx.doi.org/10.1145/2597652.2597668}}
+
+@techreport{Rogers2013,
+	Abstract = {Exascale supercomputing will embody many revolutionary changes in the hardware and software of high-performance computing. A particularly pressing issue is gaining insight into the science behind the exascale computations. Power and I/O speed con- straints will fundamentally change current visualization and analysis workflows. A traditional post-processing workflow involves storing simulation results to disk and later retrieving them for visualization and data analysis. However, at exascale, scien- tists and analysts will need a range of options for moving data to persistent storage, as the current offline or post-processing pipelines will not be able to capture the data necessary for data analysis of these extreme scale simulations. This Milestone explores two alternate workflows, characterized as in situ and in transit, and compares them. We find each to have its own merits and faults, and we provide information to help pick the best option for a particular use.},
+	Annote = {Our report for the ASC II milestone for large scale in situ processing with CTH. This reference should be replaced with a published version once available.},
+	Author = {David Rogers and Kenneth Moreland and Ron Oldfield and Nathan Fabian},
+	Date-Added = {2014-07-03 23:40:43 +0000},
+	Date-Modified = {2014-07-03 23:40:43 +0000},
+	Institution = {Sandia National Laboratories},
+	Number = {SAND2013-1122},
+	Title = {Data Co-Processing for Extreme Scale Analysis Level {II} {ASC} Milestone (4745)},
+	Year = {2013}}
 
 @inproceedings{Rossinelli2013,
 	Abstract = {We present unprecedented, high throughput simulations of cloud cavitation collapse on 1.6 million cores of Sequoia reaching 55% of its nominal peak performance, corresponding to 11 PFLOP/s. The destructive power of cavitation reduces the lifetime of energy critical systems such as internal combustion engines and hydraulic turbines, yet it has been harnessed for water purification and kidney lithotripsy. The present two-phase flow simulations enable the quantitative prediction of cavitation using 13 trillion grid points to resolve the collapse of 15'000 bubbles. We advance by one order of magnitude the current state-of-the-art in terms of time to solution, and by two orders the geometrical complexity of the flow. The software successfully addresses the challenges that hinder the effective solution of complex flows on contemporary supercomputers, such as limited memory bandwidth, I/O bandwidth and storage capacity. The present work redefines the frontier of high performance computing for fluid dynamics simulations.},

@@ -36,7 +36,7 @@
 \newcommand*{\lcite}[1]{~\cite{#1}}
 \newcommand*{\scite}[1]{~\cite{#1}}
 
-\newcommand{\etal}{et al.}
+\newcommand{\etal}{et al.\xspace}
 
 \newcommand*{\keyterm}[1]{\emph{#1}}
 
@@ -402,6 +402,21 @@ Note that the curve for $R_\mathrm{ideal}(n,p)$ is independent of $n$,
 which means we can use rate for both strong and weak scaling analysis.
 
 
+\begin{figure*}
+  \includegraphics[width=.33\linewidth]{images/OldfieldTimeLog}%
+  \includegraphics[width=.33\linewidth]{images/OldfieldRate}%
+  \includegraphics[width=.33\linewidth]{images/OldfieldEfficiency}
+  \caption{Data from the Oldfield \etal\scite{Oldfield2014,Rogers2013}
+    simulation-visualization integration study where the visualization
+    (shown here) has a high communication overhead. The traditional log-log
+    plot of time (left) shows what appears to be good scaling over several
+    data and job sizes. However, a plot of the rate (center) and efficiency
+    (right) reveal that the communication overhead has a severe impact on
+    the overall scalability.}
+  \label{fig:Oldfield}
+\end{figure*}
+
+
 \section{Example}
 
 \noindent
@@ -448,7 +463,19 @@ these data in a more informative and honest way. \fix{Could make a comment
 \subsection{Imperfect Scaling}
 
 \noindent
+Our second data set comes from a study by Oldfield
+\etal\scite{Oldfield2014,Rogers2013}. In this study a visualization
+algorithm has a high communication overhead and therefore has a known limit
+on its scalability. The study shows how transferring data between parallel
+jobs of different sizes can sometimes be faster than combining both in one
+large job.
 
+Figure~\ref{fig:Oldfield} shows the performance data for the visualization
+component. A traditional plot of the time gives curves that suggest good
+scaling performance. However, when we show the same data using the rate and
+efficiency metrics we can clearly see the effect the communication overhead
+has on the scalability of the algorithm. Without such a presentation,
+erroneous interpretation of the performance is sure to occur.
 
 \section{Discussion}
 
