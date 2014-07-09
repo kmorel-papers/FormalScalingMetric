@@ -2,11 +2,15 @@
 
 \documentclass[conference]{IEEEtran}
 
+% Prevents an error in the enumitem, which conflicts with a legacy thing in
+% IEEEtran package.
+\let\labelindent\relax
+
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage[cmex10]{amsmath}
 \usepackage{booktabs}
-%\usepackage{enumitem}
+\usepackage{enumitem}
 \usepackage{graphicx}
 \usepackage{fancyvrb}
 \usepackage{ifthen}
@@ -70,7 +74,8 @@
 %
 % paper title
 % can use linebreaks \\ within to get better formatting as desired
-\title{A Formal Metric for Large-Scale Parallel Algorithm Performance Analysis}
+%\title{A Formal Metric for Large-Scale Parallel Algorithm Performance Analysis}
+\title{Formal Metrics for Large-Scale Parallel Performance}
 
 
 % author names and affiliations
@@ -417,7 +422,7 @@ which means we can use rate for both strong and weak scaling analysis.
 \end{figure*}
 
 
-\section{Example}
+\section{Examples}
 
 \noindent
 In the previous sections we provided mathematical derivations to show how
@@ -455,10 +460,7 @@ Please note that it is not our intention to criticize the scaling shown by
 Habib \etal\scite{Habib2013}. On the contrary, they show HACC to be world
 class in scalability and demonstrate a consistent efficiency while scaling
 the problem by an order of magnitude. Rather, our intention is to present
-these data in a more informative and honest way. \fix{Could make a comment
-  about being able to use a strong scaling study at a large data scale, but
-  maybe that's not appropriate. Could reference that in the discussion
-  instead.}
+these data in a more informative and honest way.
 
 \subsection{Imperfect Scaling}
 
@@ -480,10 +482,31 @@ erroneous interpretation of the performance is sure to occur.
 \section{Discussion}
 
 \noindent
-Final recommendations? No log-log? Many short strong scale studies over
-multiple scales?
+In this paper we discuss limitations of traditional parallel performance
+analysis and problems with the current metrics often used. We provide
+derivations of rate as a proxy for speedup, ideal rate, and efficiency and
+demonstrate with real data how these provide accurate visual
+representations of scalability. As scientists, we should demand this high
+level of transparency and honesty in performance analysis.
 
-Future work incorporating power in cost\lcite{Cameron2012}?
+With these observations, we provide the following recommendations for the
+visual display of parallel performance.
+\begin{packed_itemize}
+\item Do not rely on running time for performance analysis. Instead use
+  rate, efficiency, or both.
+\item Avoid using log-log scaling on plot axes, which hides major
+  inefficiencies. If necessary repeat linear plots at different scales.
+\item Rather than performing separate weak and strong scaling studies,
+  incorporate them in one. Perform several strong scaling studies at
+  different scales. Then find an overall minimal cost per unit and plot all
+  the measurements together as demonstrated in the figures in this paper.
+\end{packed_itemize}
+
+As architectures continue to advance, many are beginning to advocate
+measuring power instead of or in addition to speed\lcite{Cameron2012}. As
+future work we advocate using a cost model for this as well, which should
+provide a similarly effective cost per unit for efficiency (although rate
+may lose meaning).
 
 
 % use section* for acknowledgement
