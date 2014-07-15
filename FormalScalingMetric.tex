@@ -45,6 +45,7 @@
 \newcommand*{\keyterm}[1]{\emph{#1}}
 
 \newcommand{\fix}[1]{{\color{red}\textsc{[#1]}}}
+%\newcommand{\fix}[1]{}
 
 % Avoid putting figures on their own page.
 \renewcommand{\textfraction}{0.05}
@@ -140,9 +141,9 @@
 Performance measurement of parallel algorithms is well studied and well
 understood. However, a flaw in our performance metrics is that they rely on
 comparisons to serial performance with the same input. This comparison is
-convenient for theoretic complexity analysis but impossible to perform in
+convenient for theoretical complexity analysis but impossible to perform in
 large-scale empirical studies with data sizes far too large to run on a
-single serial computer.  Consequently, scaling studies currently rely ad
+single serial computer.  Consequently, scaling studies currently rely on ad
 hoc methods that, although effective, have no grounded mathematical models.
 In this position paper we advocate using a rate-based model that has a
 concrete meaning relative to speedup and efficiency and that can be used to
@@ -165,7 +166,7 @@ The \keyterm{speedup} of a parallel algorithm is defined as
   \label{eq:Speedup}
 \end{equation}
 where $T(n,p)$ is the time it takes to run the parallel algorithm on $p$
-processing elements with an input of size $n$ and $T^*(n)$ the time for the
+processing elements with an input of size $n$, and $T^*(n)$ the time for the
 best serial algorithm on the same input. The best possible serial algorithm
 may be different than the parallel algorithm although using the same
 algorithm is also common practice.
@@ -180,8 +181,8 @@ the ideal speedup.
 \end{equation}
 
 Amdahl\scite{Amdahl1967} famously observes the limits of scaling any
-parallel algorithm based on the computation fraction $f$ that exists in any
-algorithm that is inherently serial. The equation derived from this
+parallel algorithm based on the fraction $f$ of inherently serial
+computation that exists in any algorithm. The equation derived from this
 observation is known as \keyterm{Amdahl's law}.
 \begin{equation}
   S(n,p) \leq \frac{1}{f + (1-f)/p}
@@ -224,15 +225,15 @@ from an algorithm's running time relative to the number of processing
 elements, which is called \keyterm{strong scaling}\lcite{Kaminsky2014}.
 Because a parallel algorithm with perfect speedup has a running time
 proportional to $1/p$, we look for time behavior that follows a roughly
-hyperbolic plot that asymptotically a number close to zero (representing
-the overhead). However, all but the very worst scaling algorithms tend to
-asymptotically approach some constant time, which makes it difficult to
-distinguish when an algorithm is actually scaling well. Often we try to
-rectify the problem by plotting the running time using log scaling for both
-the number of processing elements and the time because perfect scaling on
-this plot is a straight line. However, overheads of any polynomial order
-are also straight lines, which again makes it difficult to differentiate
-good and bad scaling.
+hyperbolic plot that asymptotically approaches a number close to zero
+(representing the overhead). However, all but the very worst scaling
+algorithms tend to asymptotically approach some constant time, which makes
+it difficult to distinguish when an algorithm is actually scaling
+well. Often we try to rectify the problem by plotting the running time
+using log scaling for both the number of processing elements and the time
+because perfect scaling on this plot is a straight line. However, overheads
+of any polynomial order are also straight lines, which again makes it
+difficult to differentiate good and bad scaling.
 
 Another common approach is to measure \keyterm{weak scaling}\lcite{Kaminsky2014}.
 In weak scaling the size of the input data is increased with the number of
@@ -261,12 +262,13 @@ scalability\lcite{Kaminsky2014}. Rate is formally defined as
 \end{equation}
 Some analysts have discovered that rate, being essentially a reciprocal of
 time, provides a much better visual analysis of scaling, and it is
-an essential the mechanism advocated in this position paper.
+an essential mechanism advocated in this position paper.
 
 This paper will establish a realistic definition of speedup and efficiency
 that can be easily measured empirically. Furthermore, we will demonstrate
 how rate can be used as a proxy for speedup and can unify strong and weak
-scaling to provide a more complete analysis.
+scaling to provide a more complete analysis. These metrics are demonstrated
+using real performance data.
 
 
 \section{Deriving Efficiency from Cost Analysis}
@@ -287,12 +289,12 @@ core-hours.
 
 Clearly the most efficient algorithm will be the one that costs the least
 to run. Although we expect the cost to go up with the problem size, a
-perfectly scaled algorithm will cost the same regardless of how many
-processors are used. That is, adding processors the reduces time. Given a
-strong scaling study on a problem of a particular size, we can identify the
-best (minimal) cost, $C^*(n)$ using $p^*$ processing elements. With this
-best cost we can redefine efficiency as the ratio of this best cost to the
-actual cost.
+perfectly scaled algorithm on a fixed input size will cost the same
+regardless of how many processors are used. That is, adding processors
+reduces the time proportionally. Given a strong scaling study on a problem
+of a particular size, we can identify the best (minimal) cost, $C^*(n)$
+using $p^*$ processing elements. With this best cost we can redefine
+efficiency as the ratio of this best cost to the actual cost.
 \begin{equation}
   E(n,p) = \frac{C^*(n)}{C(n,p)}
   \label{eq:EfficiencyCost}
@@ -327,8 +329,8 @@ cost per unit is constant under any number of processing elements \emph{or}
 data sizes. Thus, given multiple strong scaling studies over data of
 different sizes, we can find the best (minimal) cost per unit $C_{/u}^*$
 using $p^*$ processing elements and with data of size $n^*$. With this best
-cost per unit we can adjusted to be comparable across all possible
-configurations.
+cost per unit we can adjust the efficiency to be comparable across all
+possible configurations.
 \begin{equation}
   E(n,p) = \frac{C_{/u}^*}{C_{/u}(n,p)}
   \label{eq:EfficiencyCostPerUnit}
@@ -366,6 +368,7 @@ studies into one unified analysis. \fix{Does this need to be explained
 \section{Rate as a Proxy for Speedup}
 \label{sec:RateProxy}
 
+\noindent
 Both efficiency and speedup are good metrics for parallel performance
 analysis. However, many analysts prefer using speedup, particularly for
 visual (chart) analysis. This is because good scaling shows an upward
@@ -399,7 +402,7 @@ Equation~\ref{eq:EfficiencyCostPerUnit}.
   C_{/u}^* \frac{n}{p \; T(n,p)} &= E(n,p) \nonumber \\
   \frac{C_{/u}^*}{p} R(n,p) &= E(n,p) \nonumber \\
   \frac{C_{/u}^*}{p} R_\mathrm{ideal}(n,p) &= 1 \nonumber \\
-  R_\mathrm{ideal}(n,p) &= p \frac{1}{C_{/u}^*}
+  R_\mathrm{ideal}(n,p) &= \frac{p}{C_{/u}^*}
 \end{align}
 \endgroup
 
@@ -425,7 +428,7 @@ which means we can use rate for both strong and weak scaling analysis.
 \section{Examples}
 
 \noindent
-In the previous sections we provided mathematical derivations to show how
+In the previous sections we provide mathematical derivations to show how
 to use rate as a proxy for speedup and to use cost per unit to find the
 efficiency and ideal rate across all scales. In this section we demonstrate
 using these metrics on real measured data.
@@ -452,9 +455,9 @@ perfect.
 
 Figure~\ref{fig:HabibBetter} shows the same data using the rate and
 efficiency metrics advocated in this paper. The weak scaling is shown to
-scale off by a measurable fractions, which is to be expected when scaling
-over 3 orders of magnitude. The strong scaling study is shown to diverge
-very far from ideal.
+diverge from ideal by a measurable fraction, which is to be expected when
+scaling over 3 orders of magnitude. The strong scaling study is shown to
+diverge very far from ideal.
 
 Please note that it is not our intention to criticize the scaling shown by
 Habib \etal\scite{Habib2013}. On the contrary, they show HACC to be world
@@ -506,7 +509,7 @@ As architectures continue to advance, many are beginning to advocate
 measuring power instead of or in addition to speed\lcite{Cameron2012}. As
 future work we advocate using a cost model for this as well, which should
 provide a similarly effective cost per unit for efficiency (although rate
-may lose meaning).
+may lose meaning). \fix{Is this paragraph off topic?}
 
 
 % use section* for acknowledgement
