@@ -44,8 +44,8 @@
 
 \newcommand*{\keyterm}[1]{\emph{#1}}
 
-%\newcommand{\fix}[1]{{\color{red}\textsc{[#1]}}}
-\newcommand{\fix}[1]{}
+\newcommand{\fix}[1]{{\color{red}\textsc{[#1]}}}
+%\newcommand{\fix}[1]{}
 
 % Avoid putting figures on their own page.
 \renewcommand{\textfraction}{0.05}
@@ -153,9 +153,18 @@ unify strong and weak scaling studies.
 \section{Introduction}
 
 \noindent
-The theory of parallel performance is well studied and often used in
-practice, yet all our current models are limited by their reliance on
-serial behavior.
+Empirical scaling studies are an important component in the study of
+parallel algorithms and systems. A scaling study tests the performance of a
+parallel algorithm using different numbers of processing elements and
+usually over different amounts of data. A good scaling study shows how
+effective additional processing elements are used by the algorithm and
+through trends provides evidence of behavior at future larger scales.
+
+The practice of measuring scaling relies on the well studied models for the
+theory of parallel performance. However, all of our current theoretic
+models rely on comparisons with algorithm behavior on a single, serial
+processing element. Empirically measuring serial behavior for sufficiently
+large parallel problems is impractical.
 
 \subsection{Performance Analysis Theory}
 
@@ -231,9 +240,15 @@ algorithms tend to asymptotically approach some constant time, which makes
 it difficult to distinguish when an algorithm is actually scaling
 well. Often we try to rectify the problem by plotting the running time
 using log scaling for both the number of processing elements and the time
-because perfect scaling on this plot is a straight line. However, overheads
-of any polynomial order are also straight lines, which again makes it
-difficult to differentiate good and bad scaling.
+because perfect scaling on this plot is a straight line.
+
+However, overheads of any polynomial order are also straight lines. A
+scaling study is comparing against the ideal performance that has
+polynomial order of 1 (or -1 when plotting by time). A trend with an order
+as low as 2 still has serious scaling limitations. Visually differentiating
+slopes this close can be challenging and can depend on the dimensions of
+the plot\lcite{Cleveland1994}. Consequently, the log axes make it difficult
+to differentiate good and bad scaling.
 
 Another common approach is to measure \keyterm{weak scaling}\lcite{Kaminsky2014}.
 In weak scaling the size of the input data is increased with the number of
@@ -264,11 +279,11 @@ Some analysts have discovered that rate, being essentially a reciprocal of
 time, provides a much better visual analysis of scaling, and it is
 an essential mechanism advocated in this position paper.
 
-This paper will establish a realistic definition of speedup and efficiency
-that can be easily measured empirically. Furthermore, we will demonstrate
-how rate can be used as a proxy for speedup and can unify strong and weak
-scaling to provide a more complete analysis. These metrics are demonstrated
-using real performance data.
+This paper establishes a more practical definition of speedup and
+efficiency that can be easily measured empirically. Furthermore, we will
+demonstrate how rate can be used as a proxy for speedup and can unify
+strong and weak scaling to provide a more complete analysis. These metrics
+are demonstrated using real performance data.
 
 
 \section{Deriving Efficiency from Cost Analysis}
@@ -337,8 +352,7 @@ possible configurations.
 \end{equation}
 
 With this definition of efficiency we can combine strong and weak scaling
-studies into one unified analysis. \fix{Does this need to be explained
-  more?}
+studies into one unified analysis.
 
 
 \begin{figure*}
@@ -403,11 +417,38 @@ Equation~\ref{eq:EfficiencyCostPerUnit}.
   \frac{C_{/u}^*}{p} R(n,p) &= E(n,p) \nonumber \\
   \frac{C_{/u}^*}{p} R_\mathrm{ideal}(n,p) &= 1 \nonumber \\
   R_\mathrm{ideal}(n,p) &= \frac{p}{C_{/u}^*}
+  \label{eq:IdealRate}
 \end{align}
 \endgroup
 
 Note that the curve for $R_\mathrm{ideal}(n,p)$ is independent of $n$,
-which means we can use rate for both strong and weak scaling analysis.
+which means we can use the same ideal rate for both strong and weak scaling
+analysis and can compare these rates with each other.
+
+\subsection{Effective Empirical Parameter Sampling}
+
+Both the efficiency (Equation \ref{eq:EfficiencyCostPerUnit}) and the ideal
+rate (Equation \ref{eq:IdealRate}) are defined in terms of the optimal cost
+per unit, $C_{/u}^*$. Finding the optimal cost per unit is imperative to
+understanding scaling with these metrics. With any empirical study the best
+known cost per unit is constrained to the values measured by experiment.
+The quality of the measured optimal cost per unit can be undermined by a
+narrow exploration of parameters, but then so is a scaling study as a
+whole. A quality scaling study measures a wide breadth of parameters.
+
+Most scaling studies must consider at least two parameters: the size of the
+problem and the number of processing elements. Traditional strong and
+weak scaling studies limit the search to a 1D line in this 2D parameter
+space; strong scaling explores the line where the problem size is set to a
+constant value, and weak scaling explores the line where the problem size
+and number of processing elements are proportional. Such one dimensional
+analysis is a sparse sampling of the parameter space that can easily miss
+optimal configurations.
+
+Instead, the cost-per-unit--based efficiency and rate metrics encourage
+sampling the two dimensional parameter space of problem size and processing
+elements. A more thorough parameter sampling of this nature lends more
+credibility in the results of the scaling study.
 
 
 \begin{figure*}
@@ -431,7 +472,9 @@ which means we can use rate for both strong and weak scaling analysis.
 In the previous sections we provide mathematical derivations to show how
 to use rate as a proxy for speedup and to use cost per unit to find the
 efficiency and ideal rate across all scales. In this section we demonstrate
-using these metrics on real measured data.
+using these metrics on real measured data. We can observe that the metrics
+of rate and efficiency make it easier to visually identify the behavior and
+trends at different scales of processing elements.
 
 \subsection{Gordon Bell Finalist}
 
@@ -509,7 +552,18 @@ As architectures continue to advance, many are beginning to advocate
 measuring power instead of or in addition to speed\lcite{Cameron2012}. As
 future work we advocate using a cost model for this as well, which should
 provide a similarly effective cost per unit for efficiency (although rate
-may lose meaning). \fix{Is this paragraph off topic?}
+may lose meaning).
+
+The use of rate or efficiency to measure parallel performance is not itself
+a new technique. After all, the ubiquitous ``FLOPS'' measurement is itself
+a rate, and measurements given in data unit per time unit can be found
+throughout the literature. However, other metrics of varying effectiveness
+are also found in published material with little or no justification for
+the choice. The decision for scaling metrics should not be arbitrary; it
+can have enormous impact on the viability of the analysis. Our intention is
+to show that the metric visualized does matter, to provide a best practices
+for measuring scalability, and to explain why these metrics work better
+than others.
 
 
 % use section* for acknowledgement
