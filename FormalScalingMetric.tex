@@ -303,31 +303,6 @@ possible configurations.
 With this definition of efficiency we can combine strong and weak scaling
 studies into one unified analysis.
 
-
-\begin{figure*}
-  \includegraphics[width=.5\linewidth]{images/HabibTime}%
-  \includegraphics[width=.5\linewidth]{images/HabibTimePerParticle}
-  \caption{Data from the Habib \etal\scite{Habib2013} Gordon Bell
-    finalist. The left chart shows the data using a traditional time
-    metric. The right chart replicates the presentation of Figure~3 in the
-    original Habib \etal paper using an ad hoc metric and a log-log
-    scale. Both charts present the data in a way to suggest near perfect
-    scaling for both scaling studies.}
-  \label{fig:HabibTraditional}
-\end{figure*}
-
-\begin{figure*}
-  \includegraphics[width=.5\linewidth]{images/HabibRate}%
-  \includegraphics[width=.5\linewidth]{images/HabibEfficiency}
-  \caption{Data from the Habib \etal\scite{Habib2013} Gordon Bell finalist
-    using the rate (left) and efficiency (right) metrics advocated in this
-    paper. These plots give a more realistic and visually measurable
-    representation of scaling than the charts in
-    Figure~\ref{fig:HabibTraditional}.}
-  \label{fig:HabibBetter}
-\end{figure*}
-
-
 \section{Rate as a Proxy for Speedup}
 \label{sec:RateProxy}
 
@@ -400,21 +375,6 @@ elements. A more thorough parameter sampling of this nature lends more
 credibility in the results of the scaling study.
 
 
-\begin{figure*}
-  \includegraphics[width=.33\linewidth]{images/OldfieldTimeLog}%
-  \includegraphics[width=.33\linewidth]{images/OldfieldRate}%
-  \includegraphics[width=.33\linewidth]{images/OldfieldEfficiency}
-  \caption{Data from the Oldfield \etal\scite{Oldfield2014,Rogers2013}
-    simulation-visualization integration study where the visualization
-    (shown here) has a high communication overhead. The traditional log-log
-    plot of time (left) shows what appears to be good scaling over several
-    data and job sizes. However, a plot of the rate (center) and efficiency
-    (right) reveal that the communication overhead has a severe impact on
-    the overall scalability.}
-  \label{fig:Oldfield}
-\end{figure*}
-
-
 \section{Examples}
 
 \noindent
@@ -445,11 +405,34 @@ to unify the curve shape of the two plots, which is also replicated in
 Figure~\ref{fig:HabibTraditional}. Again, both curves appear close to
 perfect.
 
+\begin{figure}[htb]
+  \includegraphics[width=.5\linewidth]{images/HabibTime}%
+  \includegraphics[width=.5\linewidth]{images/HabibTimePerParticle}
+  \caption{Data from the Habib \etal\scite{Habib2013} Gordon Bell
+    finalist. The left chart shows the data using a traditional time
+    metric. The right chart replicates the presentation of Figure~3 in the
+    original Habib \etal paper using an ad hoc metric and a log-log
+    scale. Both charts present the data in a way to suggest near perfect
+    scaling for both scaling studies.}
+  \label{fig:HabibTraditional}
+\end{figure}
+
 Figure~\ref{fig:HabibBetter} shows the same data using the rate and
 efficiency metrics advocated in this paper. The weak scaling is shown to
 diverge from ideal by a measurable fraction, which is to be expected when
 scaling over 3 orders of magnitude. The strong scaling study is shown to
 diverge very far from ideal.
+
+\begin{figure}[htb]
+  \includegraphics[width=.5\linewidth]{images/HabibRate}%
+  \includegraphics[width=.5\linewidth]{images/HabibEfficiency}
+  \caption{Data from the Habib \etal\scite{Habib2013} Gordon Bell finalist
+    using the rate (left) and efficiency (right) metrics advocated in this
+    paper. These plots give a more realistic and visually measurable
+    representation of scaling than the charts in
+    Figure~\ref{fig:HabibTraditional}.}
+  \label{fig:HabibBetter}
+\end{figure}
 
 Please note that it is not our intention to criticize the scaling shown by
 Habib \etal\scite{Habib2013}. On the contrary, they show HACC to be world
@@ -467,12 +450,32 @@ on its scalability. The study shows how transferring data between parallel
 jobs of different sizes can sometimes be faster than combining both in one
 large job.
 
-Figure~\ref{fig:Oldfield} shows the performance data for the visualization
-component. A traditional plot of the time gives curves that suggest good
-scaling performance. However, when we show the same data using the rate and
-efficiency metrics we can clearly see the effect the communication overhead
-has on the scalability of the algorithm. Without such a presentation,
-erroneous interpretation of the performance is sure to occur.
+A traditional plot of the time of the visualization component shown in
+Figure~\ref{fig:OldfieldTraditional} gives curves that suggest good scaling
+performance. However, when we show the same data using the rate and
+efficiency metrics, shown in Figure~\ref{fig:OldfieldBetter}, we can
+clearly see the effect the communication overhead has on the scalability of
+the algorithm. Without such a presentation, erroneous interpretation of the
+performance is sure to occur.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=.5\linewidth]{images/OldfieldTimeLog}
+  \caption{Data from the Oldfield \etal\scite{Oldfield2014,Rogers2013}
+    simulation-visualization integration study where the visualization
+    (shown here) has a high communication overhead visualized using the
+    traditional log-log plot of time.}
+  \label{fig:OldfieldTraditional}
+\end{figure}
+
+\begin{figure}
+  \includegraphics[width=.5\linewidth]{images/OldfieldRate}%
+  \includegraphics[width=.5\linewidth]{images/OldfieldEfficiency}
+  \caption{Data from Oldfield \etal\scite{Oldfield2014,Rogers2013} using
+    rate (left) and efficiency (right) to reveal that the communication
+    overhead has a severe impact on the overall scalability.}
+  \label{fig:OldfieldBetter}
+\end{figure}
 
 \section{Discussion}
 
