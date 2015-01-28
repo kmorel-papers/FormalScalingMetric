@@ -102,7 +102,7 @@ unify strong and weak scaling studies.
 \section{Introduction}
 
 \noindent
-Empirical scaling studies are an important component in the study of
+Empirical scaling studies are an important component in the analysis of
 parallel algorithms and systems. A scaling study tests the performance of a
 parallel algorithm using different numbers of processing elements and
 usually over different amounts of data. A good scaling study shows how
@@ -118,6 +118,8 @@ large parallel problems is impractical.
 \subsection{Performance Analysis Theory}
 
 \noindent
+The following is a brief overview of parallel algorithm performance.
+
 The \keyterm{speedup} of a parallel algorithm is defined as
 \begin{equation}
   S(n,p) = \frac{T^*(n)}{T(n,p)}
@@ -192,18 +194,18 @@ using log scaling for both the number of processing elements and the time
 because perfect scaling on this plot is a straight line.
 
 However, overheads of any polynomial order are also straight lines. A
-scaling study is comparing against the ideal performance that has
-polynomial order of 1 (or -1 when plotting by time). A trend with an order
-as low as 2 still has serious scaling limitations. Visually differentiating
-slopes this close can be challenging and can depend on the dimensions of
-the plot\lcite{Cleveland1994}. Consequently, the log axes make it difficult
-to differentiate good and bad scaling.
+scaling study compares against the ideal performance, which has polynomial
+order of 1 (or -1 when plotting by time). A trend with an order as low as 2
+still has serious scaling limitations. Visually differentiating slopes this
+close can be challenging and can depend on the dimensions of the
+plot\lcite{Cleveland1994}. Consequently, the log axes make it difficult to
+differentiate good and bad scaling.
 
 Another common approach is to measure \keyterm{weak scaling}\lcite{Kaminsky2014}.
 In weak scaling the size of the input data is increased with the number of
 processing elements. Typically the input is kept proportional to the number
 of processing elements. In this case a perfectly scaling algorithm will
-have the same running time for all runs. Although an important
+have the same running time for all experiments. Although an important
 characteristic, weak scaling should also be coupled with strong scaling to
 get a complete picture. Also, analyzing weak scaling this way requires the
 ability to vary the data proportionally with the processing elements, which
@@ -228,11 +230,11 @@ Some analysts have discovered that rate, being essentially a reciprocal of
 time, provides a much better visual analysis of scaling, and it is
 an essential mechanism advocated in this position paper.
 
-This paper establishes a more practical definition of speedup and
-efficiency that can be easily measured empirically. Furthermore, we will
-demonstrate how rate can be used as a proxy for speedup and can unify
-strong and weak scaling to provide a more complete analysis. These metrics
-are demonstrated using real performance data.
+This paper establishes a more pragmatic definition and efficiency that can
+be easily measured empirically. Furthermore, we demonstrate how rate can be
+used as a proxy for speedup and can unify strong and weak scaling to
+provide a more complete analysis. These metrics are demonstrated using real
+performance data.
 
 
 \section{Deriving Efficiency from Cost Analysis}
