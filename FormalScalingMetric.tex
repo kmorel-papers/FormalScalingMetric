@@ -351,30 +351,30 @@ Note that the curve for $R_\mathrm{ideal}(n,p)$ is independent of $n$,
 which means we can use the same ideal rate for both strong and weak scaling
 analysis and can compare these rates with each other.
 
-\subsection{Effective Empirical Parameter Sampling}
+%% \section{Effective Empirical Parameter Sampling}
 
-Both the efficiency (Equation \ref{eq:EfficiencyCostPerUnit}) and the ideal
-rate (Equation \ref{eq:IdealRate}) are defined in terms of the optimal cost
-per unit, $C_{/u}^*$. Finding the optimal cost per unit is imperative to
-understanding scaling with these metrics. With any empirical study the best
-known cost per unit is constrained to the values measured by experiment.
-The quality of the measured optimal cost per unit can be undermined by a
-narrow exploration of parameters, but then so is a scaling study as a
-whole. A quality scaling study measures a wide breadth of parameters.
+%% Both the efficiency (Equation \ref{eq:EfficiencyCostPerUnit}) and the ideal
+%% rate (Equation \ref{eq:IdealRate}) are defined in terms of the optimal cost
+%% per unit, $C_{/u}^*$. Finding the optimal cost per unit is imperative to
+%% understanding scaling with these metrics. With any empirical study the best
+%% known cost per unit is constrained to the values measured by experiment.
+%% The quality of the measured optimal cost per unit can be undermined by a
+%% narrow exploration of parameters, but then so is a scaling study as a
+%% whole. A quality scaling study measures a wide breadth of parameters.
 
-Most scaling studies must consider at least two parameters: the size of the
-problem and the number of processing elements. Traditional strong and
-weak scaling studies limit the search to a 1D line in this 2D parameter
-space; strong scaling explores the line where the problem size is set to a
-constant value, and weak scaling explores the line where the problem size
-and number of processing elements are proportional. Such one dimensional
-analysis is a sparse sampling of the parameter space that can easily miss
-optimal configurations.
+%% Most scaling studies must consider at least two parameters: the size of the
+%% problem and the number of processing elements. Traditional strong and
+%% weak scaling studies limit the search to a 1D line in this 2D parameter
+%% space; strong scaling explores the line where the problem size is set to a
+%% constant value, and weak scaling explores the line where the problem size
+%% and number of processing elements are proportional. Such one dimensional
+%% analysis is a sparse sampling of the parameter space that can easily miss
+%% optimal configurations.
 
-Instead, the cost-per-unit--based efficiency and rate metrics encourage
-sampling the two dimensional parameter space of problem size and processing
-elements. A more thorough parameter sampling of this nature lends more
-credibility in the results of the scaling study.
+%% Instead, the cost-per-unit--based efficiency and rate metrics encourage
+%% sampling the two dimensional parameter space of problem size and processing
+%% elements. A more thorough parameter sampling of this nature lends more
+%% credibility in the results of the scaling study.
 
 
 \section{Examples}
@@ -505,11 +505,11 @@ visual display of parallel performance.
   the measurements together as demonstrated in the figures in this paper.
 \end{packed_itemize}
 
-As architectures continue to advance, many are beginning to advocate
-measuring power instead of or in addition to speed\lcite{Cameron2012}. As
-future work we advocate using a cost model for this as well, which should
-provide a similarly effective cost per unit for efficiency (although rate
-may lose meaning).
+%% As architectures continue to advance, many are beginning to advocate
+%% measuring power instead of or in addition to speed\lcite{Cameron2012}. As
+%% future work we advocate using a cost model for this as well, which should
+%% provide a similarly effective cost per unit for efficiency (although rate
+%% may lose meaning).
 
 The use of rate or efficiency to measure parallel performance is not itself
 a new technique. After all, the ubiquitous ``FLOPS'' measurement is itself
