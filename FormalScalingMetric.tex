@@ -180,38 +180,57 @@ law needs only the serial fraction, but estimates for serial
 fraction such as the \keyterm{Karp-Flatt} metric\lcite{Karp1990} require
 knowing the serial performance anyway.
 
-Because of this issue, many studies attempt to assess scalability directly
-from an algorithm's running time relative to the number of processing
-elements, which is called \keyterm{strong scaling}\lcite{Kaminsky2014}.
-Because a parallel algorithm with perfect speedup has a running time
-proportional to $1/p$, we look for time behavior that follows a roughly
-hyperbolic plot that asymptotically approaches a number close to zero
-(representing the overhead). However, all but the very worst scaling
-algorithms tend to asymptotically approach some constant time, which makes
-it difficult to distinguish when an algorithm is actually scaling
-well. Often we try to rectify the problem by plotting the running time
-using log scaling for both the number of processing elements and the time
-because perfect scaling on this plot is a straight line.
+%% Because of this issue, many studies attempt to assess scalability directly
+%% from an algorithm's running time relative to the number of processing
+%% elements, which is called \keyterm{strong scaling}\lcite{Kaminsky2014}.
+%% Because a parallel algorithm with perfect speedup has a running time
+%% proportional to $1/p$, we look for time behavior that follows a roughly
+%% hyperbolic plot that asymptotically approaches a number close to zero
+%% (representing the overhead). However, all but the very worst scaling
+%% algorithms tend to asymptotically approach some constant time, which makes
+%% it difficult to distinguish when an algorithm is actually scaling
+%% well. Often we try to rectify the problem by plotting the running time
+%% using log scaling for both the number of processing elements and the time
+%% because perfect scaling on this plot is a straight line.
 
-However, overheads of any polynomial order are also straight lines. A
-scaling study compares against the ideal performance, which has polynomial
-order of 1 (or -1 when plotting by time). A trend with an order as low as 2
-still has serious scaling limitations. Visually differentiating slopes this
-close can be challenging and can depend on the dimensions of the
-plot\lcite{Cleveland1994}. Consequently, the log axes make it difficult to
-differentiate good and bad scaling.
+%% However, overheads of any polynomial order are also straight lines. A
+%% scaling study compares against the ideal performance, which has polynomial
+%% order of 1 (or -1 when plotting by time). A trend with an order as low as 2
+%% still has serious scaling limitations. Visually differentiating slopes this
+%% close can be challenging and can depend on the dimensions of the
+%% plot\lcite{Cleveland1994}. Consequently, the log axes make it difficult to
+%% differentiate good and bad scaling.
 
-Another common approach is to measure \keyterm{weak scaling}\lcite{Kaminsky2014}.
-In weak scaling the size of the input data is increased with the number of
-processing elements. Typically the input is kept proportional to the number
-of processing elements. In this case a perfectly scaling algorithm will
-have the same running time for all experiments. Although an important
-characteristic, weak scaling should also be coupled with strong scaling to
-get a complete picture. Also, analyzing weak scaling this way requires the
-ability to vary the data proportionally with the processing elements, which
-is not always possible.  For example, some simulations might adaptively
-remesh based on some criteria, which means the size of the data can be
-modified but not directly set by an analyst.
+%% Another common approach is to measure \keyterm{weak scaling}\lcite{Kaminsky2014}.
+%% In weak scaling the size of the input data is increased with the number of
+%% processing elements. Typically the input is kept proportional to the number
+%% of processing elements. In this case a perfectly scaling algorithm will
+%% have the same running time for all experiments. Although an important
+%% characteristic, weak scaling should also be coupled with strong scaling to
+%% get a complete picture. Also, analyzing weak scaling this way requires the
+%% ability to vary the data proportionally with the processing elements, which
+%% is not always possible.  For example, some simulations might adaptively
+%% remesh based on some criteria, which means the size of the data can be
+%% modified but not directly set by an analyst.
+
+Because of this issue, most studies attempt to asses scalability with a
+pair of trends named strong scalability and weak
+scalability\lcite{Kaminsky2014}. \keyterm{Strong scaling} demonstrates an
+algorithm's behavior by measuring its run time on a particular data set for
+various numbers of processing elements. Perfect strong scaling has a
+running time proportional to $1/p$. As we shall see in examples later, it
+is difficult to compare the quality of plotted curves to this perfect
+hyperbolic on both linear and log scales.
+
+Per Amdahl's law, there are inevitable limits to strong scaling. In
+contrast \keyterm{weak scaling} varies the problem size proportionally with
+the number of processing elements. It may not always be possible to keep
+the problem size proportional to the job size, which make weak scaling more
+difficult. The metrics advocated in this paper simplify studying
+scalability by removing the dependence between problem size and number of
+processing elements. We encourage using them to sample the 2D parameter
+space of problem size and number of processing elements as widely as
+possible for a broader view of the scalability.
 
 Some studies use an ad hoc version of speedup that replaces the
 immeasurable $T^*(n)$ with some arbitrarily chosen measurement, usually the
@@ -287,6 +306,7 @@ efficiency under weak scaling we define the new metric \keyterm{cost per
 one unit of data.
 \begin{equation}
   C_{/u}(n,p) = \frac{C(n,p)}{n} = \frac{p \; T(n,p)}{n}
+  = \frac{p}{R(n,p)}
   \label{eq:CostPerUnit}
 \end{equation}
 
@@ -332,20 +352,29 @@ identical with the appropriate scaling of the ordinate axis.
 For a proper parallel performance analysis we need to compare our measured
 metrics with the ideal metrics. These ideal values are implicit in the
 definition of efficiency ($E_\mathrm{ideal}(n,p) = 1$) and speedup
-($S_\mathrm{ideal}(n,p) = p$). The ideal rate is dependent on the measured
-best cost per unit and can be derived from
-Equation~\ref{eq:EfficiencyCostPerUnit}.
-\begingroup
-\addtolength{\jot}{1ex} % Space equations a bit more. Fractions are cluttered.
-\begin{align}
-  \frac{C_{/u}^*}{C_{/u}(n,p)} &= E(n,p) \nonumber \\
-  C_{/u}^* \frac{n}{p \; T(n,p)} &= E(n,p) \nonumber \\
-  \frac{C_{/u}^*}{p} R(n,p) &= E(n,p) \nonumber \\
-  \frac{C_{/u}^*}{p} R_\mathrm{ideal}(n,p) &= 1 \nonumber \\
-  R_\mathrm{ideal}(n,p) &= \frac{p}{C_{/u}^*}
+($S_\mathrm{ideal}(n,p) = p$).
+%% The ideal rate is dependent on the measured
+%% best cost per unit and can be derived from
+%% Equation~\ref{eq:EfficiencyCostPerUnit}.
+%% \begingroup
+%% \addtolength{\jot}{1ex} % Space equations a bit more. Fractions are cluttered.
+%% \begin{align}
+%%   \frac{C_{/u}^*}{C_{/u}(n,p)} &= E(n,p) \nonumber \\
+%%   C_{/u}^* \frac{n}{p \; T(n,p)} &= E(n,p) \nonumber \\
+%%   \frac{C_{/u}^*}{p} R(n,p) &= E(n,p) \nonumber \\
+%%   \frac{C_{/u}^*}{p} R_\mathrm{ideal}(n,p) &= 1 \nonumber \\
+%%   R_\mathrm{ideal}(n,p) &= \frac{p}{C_{/u}^*}
+%%   \label{eq:IdealRate}
+%% \end{align}
+%% \endgroup
+The ideal rate can be derived from Equation~\ref{eq:EfficiencyCostPerUnit}
+by substituting the cost per unit with the rate
+(Equation~\ref{eq:CostPerUnit}) and solving for rate when the efficiency is
+the optimal value of 1.
+\begin{equation}
+  R_\mathrm{ideal}(n,p) = \frac{p}{C_{/u}^*}
   \label{eq:IdealRate}
-\end{align}
-\endgroup
+\end{equation}
 
 Note that the curve for $R_\mathrm{ideal}(n,p)$ is independent of $n$,
 which means we can use the same ideal rate for both strong and weak scaling
@@ -414,7 +443,7 @@ perfect.
   \caption{Data from the Habib \etal\scite{Habib2013} Gordon Bell
     finalist. The left chart shows the data using a traditional time
     metric. The right chart replicates the presentation of Figure~3 in the
-    original Habib \etal paper using an ad hoc metric and a log-log
+    original paper using an ad hoc metric and a log-log
     scale. Both charts present the data in a way to suggest near perfect
     scaling for both scaling studies.}
   \label{fig:HabibTraditional}
@@ -438,17 +467,17 @@ diverge very far from ideal.
   \label{fig:HabibBetter}
 \end{figure}
 
-Please note that it is not our intention to criticize the scaling shown by
-Habib \etal\scite{Habib2013}. On the contrary, they show HACC to be world
-class in scalability and demonstrate a consistent efficiency while scaling
-the problem by an order of magnitude. Rather, our intention is to present
-these data in a more informative way.
+%% Please note that it is not our intention to criticize the scaling shown by
+%% Habib \etal\scite{Habib2013}. On the contrary, they show HACC to be world
+%% class in scalability and demonstrate a consistent efficiency while scaling
+%% the problem by an order of magnitude. Rather, our intention is to present
+%% these data in a more informative way.
 
 \subsection{Imperfect Scaling}
 
 \noindent
 Our second data set comes from a study by Oldfield
-\etal\scite{Oldfield2014,Rogers2013}. In this study a visualization
+\etal\scite{Oldfield2014}. In this study a visualization
 algorithm has a high communication overhead and therefore has a known limit
 on its scalability. The study shows how transferring data between parallel
 jobs of different sizes can sometimes be faster than combining both in one
@@ -465,7 +494,7 @@ performance is sure to occur.
 \begin{figure}[htb]
   \centering
   \includegraphics[width=.48\linewidth]{images/OldfieldTimeLog}
-  \caption{Data from the Oldfield \etal\scite{Oldfield2014,Rogers2013}
+  \caption{Data from the Oldfield \etal\scite{Oldfield2014}
     simulation-visualization integration study where the visualization
     (shown here) has a high communication overhead visualized using the
     traditional log-log plot of time.}
@@ -476,7 +505,7 @@ performance is sure to occur.
   \centering
   \includegraphics[width=.48\linewidth]{images/OldfieldRate}\quad
   \includegraphics[width=.48\linewidth]{images/OldfieldEfficiency}
-  \caption{Data from Oldfield \etal\scite{Oldfield2014,Rogers2013} using
+  \caption{Data from Oldfield \etal\scite{Oldfield2014} using
     rate (left) and efficiency (right) to reveal that the communication
     overhead has a severe impact on the overall scalability.}
   \label{fig:OldfieldBetter}
