@@ -182,7 +182,7 @@ knowing the serial performance anyway.
 
 %% Because of this issue, many studies attempt to assess scalability directly
 %% from an algorithm's running time relative to the number of processing
-%% elements, which is called \keyterm{strong scaling}\lcite{Kaminsky2014}.
+%% elements, which is called \keyterm{strong scaling}\lcite{Kaminsky2015}.
 %% Because a parallel algorithm with perfect speedup has a running time
 %% proportional to $1/p$, we look for time behavior that follows a roughly
 %% hyperbolic plot that asymptotically approaches a number close to zero
@@ -201,7 +201,7 @@ knowing the serial performance anyway.
 %% plot\lcite{Cleveland1994}. Consequently, the log axes make it difficult to
 %% differentiate good and bad scaling.
 
-%% Another common approach is to measure \keyterm{weak scaling}\lcite{Kaminsky2014}.
+%% Another common approach is to measure \keyterm{weak scaling}\lcite{Kaminsky2015}.
 %% In weak scaling the size of the input data is increased with the number of
 %% processing elements. Typically the input is kept proportional to the number
 %% of processing elements. In this case a perfectly scaling algorithm will
@@ -215,7 +215,7 @@ knowing the serial performance anyway.
 
 Because of this issue, most studies attempt to asses scalability with a
 pair of trends named strong scalability and weak
-scalability\lcite{Kaminsky2014}. \keyterm{Strong scaling} demonstrates an
+scalability\lcite{Kaminsky2015}. \keyterm{Strong scaling} demonstrates an
 algorithm's behavior by measuring its run time on a particular data set for
 various numbers of processing elements. Perfect strong scaling has a
 running time proportional to $1/p$. As we shall see in examples later, it
@@ -240,7 +240,7 @@ any weak scaling comparisons are impossible.
 
 Finally, some studies use rate in terms of the size of input computed per
 unit time rather than absolute run time to assess
-scalability\lcite{Kaminsky2014}. Rate is formally defined as
+scalability\lcite{Kaminsky2015}. Rate is formally defined as
 \begin{equation}
   R(n,p) = \frac{n}{T(n,p)}
   \label{eq:Rate}
