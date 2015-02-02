@@ -9,6 +9,7 @@ set(image_src
   images/HabibTimePerParticle.pdf
   images/HabibRate.pdf
   images/HabibEfficiency.pdf
+  images/OldfieldTimeLinear.pdf
   images/OldfieldTimeLog.pdf
   images/OldfieldRate.pdf
   images/OldfieldEfficiency.pdf
