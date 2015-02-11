@@ -2,12 +2,29 @@
 %% http://bibdesk.sourceforge.net/
 
 
-%% Created for kmorel at 2015-01-28 23:37:46 -0700 
+%% Created for kmorel at 2015-02-11 13:57:01 -0700 
 
 
 %% Saved with string encoding Unicode (UTF-8) 
 
 
+
+@inproceedings{Gustafson1990,
+	Abstract = {In the problem size-ensemble size plane, fixed-sized and scaled-sized paradigms have been the subsets of primary interest to the parallel processing community. A problem with the newer scaled-sized model is that execution time increases for problems where operation complexity grows faster than storage complexity. The fixed time model is introduced, which, unlike the scaled model, implies the need to reduce problem size per processor. This reduction causes uniprocessor speed to vary. Historical ensemble models hold uniprocessor performance flat as problem size varies, even beyond physical memory size. However, tiered memory can make performance increase instead of decrease as problem size per processor shrinks, and workload can shift to routines with higher speed as the problem is scaled. Superlinear speedup results in such cases. Superlinear speedup, far from being an anomaly, becomes commonplace when the performance model makes realistic assumptions about memory speed and problem scaling.},
+	Annote = {A nice paper on the possibility of superlinear speedup in parallel computing in practice. Over 25 years old but still feels relevent.
+
+Another interesting aspect is that Gustafson defines speedup as the rate of the parallel version over the rate of the serial version. This makes it more feasible to compare to serial performance (especially in 1990).},
+	Author = {John L. Gustafson},
+	Booktitle = {Proceedings of the Fifth Distributed Memory Computing Conference},
+	Date-Added = {2015-02-11 20:56:58 +0000},
+	Date-Modified = {2015-02-11 20:56:58 +0000},
+	Month = {April},
+	Note = {{DOI}~10.1109/DMCC.1990.556383},
+	Pages = {1255--1260},
+	Title = {Fixed Time, Tiered Memory, and Superlinear Speedup},
+	Year = {1990},
+	Bdsk-Url-1 = {http://hint.byu.edu/documentation/Gus/Superlinear/Superlinear.html},
+	Bdsk-Url-2 = {http://dx.doi.org/10.1109/DMCC.1990.556383}}
 
 @book{Cleveland1994,
 	Annote = {An old but applicable textbook on charting data. Is the source of a nice example from [Tufte1997] that shows how changing the scaling of a chart has a dramatic effect on the interpretation of the data.

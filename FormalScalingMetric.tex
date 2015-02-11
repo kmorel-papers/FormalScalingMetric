@@ -131,10 +131,10 @@ best serial algorithm on the same input. The best possible serial algorithm
 may be different than the parallel algorithm although using the same
 algorithm is also common practice.
 
-In theory the best possible speedup achievable\lcite{Faber1986} is $S(n,p)
-= p$ (although in practice superlinear measurements are possible). Thus, we
-measure the \keyterm{efficiency} as the ratio of the observed speedup to
-the ideal speedup.
+In theory the best possible speedup achievable is $S(n,p) =
+p$\lcite{Faber1986} (although superlinear measurements can occur in
+practice\lcite{Gustafson1990}). Thus, we measure the \keyterm{efficiency}
+as the ratio of the observed speedup to the ideal speedup.
 \begin{equation}
   E(n,p) = \frac{S(n,p)}{p} = \frac{T^*(n)}{p \; T(n,p)}
   \label{eq:Efficiency}
@@ -175,7 +175,7 @@ for theoretical complexity analysis, they all rely in some way on knowing
 the serial performance. With large-scale simulations today reaching orders
 of billions to trillions of
 elements\lcite{Bernaschi2013,Rossinelli2013,Bussmann2013,Habib2013},
-directly measuring serial performance is impossible. The Gustafson-Barsis
+directly measuring serial performance is often impossible. The Gustafson-Barsis
 law needs only the serial fraction, but estimates for serial
 fraction such as the \keyterm{Karp-Flatt} metric\lcite{Karp1990} require
 knowing the serial performance anyway.
