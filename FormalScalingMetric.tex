@@ -314,10 +314,10 @@ Our previous definition of efficiency (Equation~\ref{eq:EfficiencyCost})
 works well for strong scaling where the data size is constant, but cannot
 be compared across different data sizes for weak scaling. To describe
 efficiency under weak scaling we define the new metric \keyterm{cost per
-  unit}, $C_{/u}$. Cost per unit is the amortized computational cost for
+  unit}, $C_u$. Cost per unit is the amortized computational cost for
 one unit of data.
 \begin{equation}
-  C_{/u}(n,p) = \frac{C(n,p)}{n} = \frac{p \; T(n,p)}{n}
+  C_u(n,p) = \frac{C(n,p)}{n} = \frac{p \; T(n,p)}{n}
   = \frac{p}{R(n,p)}
   \label{eq:CostPerUnit}
 \end{equation}
@@ -325,13 +325,13 @@ one unit of data.
 The important feature of cost per unit is that under perfect scaling the
 cost per unit is constant under any number of processing elements \emph{or}
 data sizes. Thus, given multiple strong scaling studies over data of
-different sizes, we can find the best (minimal) cost per unit $C_{/u}^*$,
+different sizes, we can find the best (minimal) cost per unit $C_u^*$,
 that uses $p^*$ processing elements operating on data of size $n^*$.
 With this best
 cost per unit we can adjust the efficiency to be comparable across all
 possible configurations.
 \begin{equation}
-  E(n,p) = \frac{C_{/u}^*}{C_{/u}(n,p)}
+  E(n,p) = \frac{C_u^*}{C_u(n,p)}
   \label{eq:EfficiencyCostPerUnit}
 \end{equation}
 
@@ -372,11 +372,11 @@ definition of efficiency ($E_\mathrm{ideal}(n,p) = 1$) and speedup
 %% \begingroup
 %% \addtolength{\jot}{1ex} % Space equations a bit more. Fractions are cluttered.
 %% \begin{align}
-%%   \frac{C_{/u}^*}{C_{/u}(n,p)} &= E(n,p) \nonumber \\
-%%   C_{/u}^* \frac{n}{p \; T(n,p)} &= E(n,p) \nonumber \\
-%%   \frac{C_{/u}^*}{p} R(n,p) &= E(n,p) \nonumber \\
-%%   \frac{C_{/u}^*}{p} R_\mathrm{ideal}(n,p) &= 1 \nonumber \\
-%%   R_\mathrm{ideal}(n,p) &= \frac{p}{C_{/u}^*}
+%%   \frac{C_u^*}{C_u(n,p)} &= E(n,p) \nonumber \\
+%%   C_u^* \frac{n}{p \; T(n,p)} &= E(n,p) \nonumber \\
+%%   \frac{C_u^*}{p} R(n,p) &= E(n,p) \nonumber \\
+%%   \frac{C_u^*}{p} R_\mathrm{ideal}(n,p) &= 1 \nonumber \\
+%%   R_\mathrm{ideal}(n,p) &= \frac{p}{C_u^*}
 %%   \label{eq:IdealRate}
 %% \end{align}
 %% \endgroup
@@ -385,7 +385,7 @@ by substituting the cost per unit with the rate
 (Equation~\ref{eq:CostPerUnit}) and solving for rate when the efficiency is
 the optimal value of 1.
 \begin{equation}
-  R_\mathrm{ideal}(n,p) = \frac{p}{C_{/u}^*}
+  R_\mathrm{ideal}(n,p) = \frac{p}{C_u^*}
   \label{eq:IdealRate}
 \end{equation}
 
@@ -397,7 +397,7 @@ analysis and can compare these rates with each other.
 
 %% Both the efficiency (Equation \ref{eq:EfficiencyCostPerUnit}) and the ideal
 %% rate (Equation \ref{eq:IdealRate}) are defined in terms of the optimal cost
-%% per unit, $C_{/u}^*$. Finding the optimal cost per unit is imperative to
+%% per unit, $C_u^*$. Finding the optimal cost per unit is imperative to
 %% understanding scaling with these metrics. With any empirical study the best
 %% known cost per unit is constrained to the values measured by experiment.
 %% The quality of the measured optimal cost per unit can be undermined by a
