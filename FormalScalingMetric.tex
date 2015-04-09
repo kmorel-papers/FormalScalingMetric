@@ -163,8 +163,16 @@ sequential operations. This law shows that speedup can be increased
 indefinitely as long as the serial fraction drops commensurately with the
 processing element increase, which can often be done by increasing the
 problem size. Grama \etal\scite{Grama1993} introduce an
-\keyterm{isoefficiency} metric that determines how much a problem needs to
-grow to maintain linear speedup.
+\keyterm{isoefficiency} relation that determines how much a problem needs to
+grow to maintain a desired level of efficiency. Given a desired efficiency
+$E_d$, the following inequality must hold.
+\begin{equation}
+  T(n,1) \geq \frac{E_d}{1-E_d} T_o(n,p)
+  \label{eq:Isoefficiency}
+\end{equation}
+where $T_o(n,p)$ is the total overhead (redundant, idle, and extra
+computation plus communication) for running the algorithm on $p$ processing
+elements for data of size $n$.
 
 Performance analysis theory is reviewed in much more detail in many
 parallel computing textbooks such as Quinn's\scite{Quinn2004}.
@@ -424,7 +432,7 @@ trends at different scales of processing elements.
 \subsection{Gordon Bell Finalist}
 
 \noindent
-Our first data set comes a study by Habib \etal\scite{Habib2013}, which is
+Our first data set comes from a study by Habib \etal\scite{Habib2013}, which is
 one of the 2013 Gordon Bell finalists. We choose this source because in
 addition to showing impressive scaling, the authors make many measurements
 across many scales and report the results completely enough to extract the
