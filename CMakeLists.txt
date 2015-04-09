@@ -18,5 +18,4 @@ set(image_src
 add_latex_document(FormalScalingMetric.tex
   BIBFILES FormalScalingMetric.bib
   IMAGES ${image_src}
-  DEFAULT_PDF
   )
