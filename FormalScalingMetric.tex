@@ -88,15 +88,15 @@
 
 \begin{abstract}
 Performance measurement of parallel algorithms is well studied and well
-understood. However, a flaw in our performance metrics is that they rely on
-comparisons to serial performance with the same input. This comparison is
-convenient for theoretical complexity analysis but impossible to perform in
-large-scale empirical studies with data sizes far too large to run on a
-single serial computer.  Consequently, scaling studies currently rely on ad
-hoc methods that, although effective, have no grounded mathematical models.
-In this position paper we advocate using a rate-based model that has a
-concrete meaning relative to speedup and efficiency and that can be used to
-unify strong and weak scaling studies.
+understood. However, a flaw in traditional performance metrics is that they
+rely on comparisons to serial performance with the same input. This
+comparison is convenient for theoretical complexity analysis but impossible
+to perform in large-scale empirical studies with data sizes far too large
+to run on a single serial computer. Consequently, scaling studies currently
+rely on ad hoc methods that, although effective, have no grounded
+mathematical models. In this position paper we advocate using a rate-based
+model that has a concrete meaning relative to speedup and efficiency and
+that can be used to unify strong and weak scaling studies.
 \end{abstract}
 
 \section{Introduction}
@@ -106,11 +106,11 @@ Empirical scaling studies are an important component in the analysis of
 parallel algorithms and systems. A scaling study tests the performance of a
 parallel algorithm using different numbers of processing elements and
 usually over different amounts of data. A good scaling study shows how
-effective additional processing elements are used by the algorithm and
+effectively additional processing elements are used by the algorithm and
 through trends provides evidence of behavior at future larger scales.
 
 The practice of measuring scaling relies on the well studied models for the
-theory of parallel performance. However, all of our current theoretic
+theory of parallel performance. However, current theoretic
 models rely on comparisons with algorithm behavior on a single, serial
 processing element. Empirically measuring serial behavior for sufficiently
 large parallel problems is impractical.
@@ -232,11 +232,13 @@ processing elements. We encourage using them to sample the 2D parameter
 space of problem size and number of processing elements as widely as
 possible for a broader view of the scalability.
 
-Some studies use an ad hoc version of speedup that replaces the
+Some studies use an ad hoc version of speedup or efficiency that replaces the
 immeasurable $T^*(n)$ with some arbitrarily chosen measurement, usually the
 time run on the smallest number of processing elements. The problem with
-this approach is that the absolute ``speedup'' values are meaningless and
-any weak scaling comparisons are impossible.
+this approach is that the absolute meaning of ``speedup'' and
+``efficiency'' changes between experiments in a study. Furthermore, the
+metric cannot be used in weak scaling because the problem size is not held
+constant.
 
 Finally, some studies use rate in terms of the size of input computed per
 unit time rather than absolute run time to assess
@@ -277,8 +279,8 @@ to run. Although we expect the cost to go up with the problem size, a
 perfectly scaled algorithm on a fixed input size will cost the same
 regardless of how many processors are used. That is, adding processors
 reduces the time proportionally. Given a strong scaling study on a problem
-of a particular size, we can identify the best (minimal) cost, $C^*(n)$
-using $p^*$ processing elements. With this best cost we can redefine
+of a particular size, we can identify the best (minimal) cost, $C^*(n)$,
+that uses $p^*$ processing elements. With this best cost we can redefine
 efficiency as the ratio of this best cost to the actual cost.
 \begin{equation}
   E(n,p) = \frac{C^*(n)}{C(n,p)}
@@ -313,8 +315,9 @@ one unit of data.
 The important feature of cost per unit is that under perfect scaling the
 cost per unit is constant under any number of processing elements \emph{or}
 data sizes. Thus, given multiple strong scaling studies over data of
-different sizes, we can find the best (minimal) cost per unit $C_{/u}^*$
-using $p^*$ processing elements and with data of size $n^*$. With this best
+different sizes, we can find the best (minimal) cost per unit $C_{/u}^*$,
+that uses $p^*$ processing elements operating on data of size $n^*$.
+With this best
 cost per unit we can adjust the efficiency to be comparable across all
 possible configurations.
 \begin{equation}
