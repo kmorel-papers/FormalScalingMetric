@@ -153,14 +153,16 @@ Gustafson\scite{Gustafson1988} observes that the serial fraction tends to
 go down for larger data sizes in parallel algorithms, which justifies the
 use of parallel computing for large problems. The \keyterm{Gustafson-Barsis
   law} reformulates speedup in terms of the parallel execution rather than
-the serial execution
+the serial execution.
 \begin{equation}
-  S(n,p) \leq p + f(1-p)
+  S(n,p) \leq p + (1-p) \cdot s(n,p)
   \label{eq:GustafsonBarsis}
 \end{equation}
-This law shows that speedup can be increased indefinitely as
-long as the serial fraction drops commensurately with the processing
-element increase. Grama \etal\scite{Grama1993} introduce an
+where $s(n,p)$ is the fraction of time in the parallel execution performing
+sequential operations. This law shows that speedup can be increased
+indefinitely as long as the serial fraction drops commensurately with the
+processing element increase, which can often be done by increasing the
+problem size. Grama \etal\scite{Grama1993} introduce an
 \keyterm{isoefficiency} metric that determines how much a problem needs to
 grow to maintain linear speedup.
 
