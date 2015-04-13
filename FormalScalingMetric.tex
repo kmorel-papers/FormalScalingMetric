@@ -325,8 +325,16 @@ one unit of data.
 The important feature of cost per unit is that under perfect scaling the
 cost per unit is constant under any number of processing elements \emph{or}
 data sizes. Thus, given multiple strong scaling studies over data of
-different sizes, we can find the best (minimal) cost per unit $C_u^*$,
-that uses $p^*$ processing elements operating on data of size $n^*$.
+different sizes, we can find the best cost per unit, $C_u^*$, that uses
+$p^*$ processing elements operating on data of size $n^*$. The best cost
+per unit is generally the minimum, but take care for outliers that are not
+representative of practical runs. For example, it is well known that a
+sufficiently small data size could fit in the cache of a sufficiently large
+parallel job\lcite{Gustafson1990}. An experiment of this nature would
+report a much lower cost per unit but would be of little relevance to the
+scale of problems run in practice and therefore should be disqualified as
+ideal.
+
 With this best
 cost per unit we can adjust the efficiency to be comparable across all
 possible configurations.
@@ -334,9 +342,8 @@ possible configurations.
   E(n,p) = \frac{C_u^*}{C_u(n,p)}
   \label{eq:EfficiencyCostPerUnit}
 \end{equation}
-
-With this definition of efficiency we can combine strong and weak scaling
-studies into one unified analysis.
+This this definition of efficiency allows us to combine strong and weak
+scaling studies into one unified analysis.
 
 \section{Rate as a Proxy for Speedup}
 \label{sec:RateProxy}
@@ -545,15 +552,16 @@ visual display of parallel performance.
   inefficiencies. If necessary repeat linear plots at different scales.
 \item Rather than performing separate weak and strong scaling studies,
   incorporate them in one. Perform several strong scaling studies at
-  different scales. Then find an overall minimal cost per unit and plot all
-  the measurements together as demonstrated in the figures in this paper.
+  different scales. Then find an overall minimal practical cost per unit
+  and plot all the measurements together as demonstrated in the figures in
+  this paper.
 \end{packed_itemize}
 
 As architectures continue to advance, many are beginning to advocate
-measuring power instead of or in addition to speed\lcite{Cameron2012}. As
-future work we advocate using a cost model for this as well. It would be
-interesting to derive efficiency in terms of optimal watt-hours per data
-unit (although rate may lose meaning).
+measuring electrical power instead of or in addition to
+speed\lcite{Cameron2012}. As future work we advocate using a cost model for
+this as well. It would be interesting to derive efficiency in terms of
+optimal watt-hours per data unit (although rate may lose meaning).
 
 The use of rate or efficiency to measure parallel performance is not itself
 a new technique. After all, the ubiquitous ``FLOPS'' measurement is itself
