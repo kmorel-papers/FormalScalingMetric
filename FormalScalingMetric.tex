@@ -223,7 +223,7 @@ knowing the serial performance anyway.
 %% remesh based on some criteria, which means the size of the data can be
 %% modified but not directly set by an analyst.
 
-Because of this issue, most studies attempt to asses scalability with a
+Because of this issue, most studies attempt to assess scalability with a
 pair of trends named strong scalability and weak
 scalability\lcite{Kaminsky2015}. \keyterm{Strong scaling} demonstrates an
 algorithm's behavior by measuring its run time on a particular data set for
@@ -235,7 +235,7 @@ hyperbolic on both linear and log scales.
 Per Amdahl's law, there are inevitable limits to strong scaling. In
 contrast \keyterm{weak scaling} varies the problem size proportionally with
 the number of processing elements. It may not always be possible to keep
-the problem size proportional to the job size, which make weak scaling more
+the problem size proportional to the job size, which makes weak scaling more
 difficult. The metrics advocated in this paper simplify studying
 scalability by removing the dependence between problem size and number of
 processing elements. We encourage using them to sample the 2D parameter
@@ -311,7 +311,7 @@ straightforward at large scales.
 
 \noindent
 Our previous definition of efficiency (Equation~\ref{eq:EfficiencyCost})
-works well for strong scaling where the data size is constant, but cannot
+works well for strong scaling where the data size is constant but cannot
 be compared across different data sizes for weak scaling. To describe
 efficiency under weak scaling we define the new metric \keyterm{cost per
   unit}, $C_u$. Cost per unit is the amortized computational cost for
@@ -447,14 +447,14 @@ information and continue analysis. In particular, we look at the
 performance data for scaling the full HACC code on Titan (Section~4.3.2 in
 the original paper).
 
-Figure~\ref{fig:HabibTraditional} shows the performance data from the
-strong and weak scaling studies using a traditional time plot. The curves
-for the data are very similar for what we would expect for perfect scaling:
-a hyperbolic curve for strong scaling and a horizontal line for weak
-scaling. Habib \etal also provide an ad hoc metric of time over data size
-to unify the curve shape of the two plots, which is also replicated in
-Figure~\ref{fig:HabibTraditional}. Again, both curves appear close to
-perfect.
+Figure~\ref{fig:HabibTraditional} on the left shows the performance data
+from the strong and weak scaling studies using a traditional time plot. The
+curves for the data are very similar for what we would expect for perfect
+scaling: a hyperbolic curve for strong scaling and a horizontal line for
+weak scaling. Habib \etal also provide an ad hoc metric of time over data
+size to unify the curve shape of the two plots, which is also replicated in
+Figure~\ref{fig:HabibTraditional} on the right. Again, both curves appear
+close to perfect.
 
 \begin{figure}[htb]
   \centering
@@ -473,7 +473,8 @@ Figure~\ref{fig:HabibBetter} shows the same data using the rate and
 efficiency metrics advocated in this paper. The weak scaling is shown to
 diverge from ideal by a measurable fraction, which is to be expected when
 scaling over 3 orders of magnitude. The strong scaling study is shown to
-diverge very far from ideal.
+diverge very far from ideal, which is not at all apparent in the original
+charts.
 
 \begin{figure}[htb]
   \centering
@@ -549,12 +550,12 @@ visual display of parallel performance.
 \item Do not rely on running time for performance analysis. Instead use
   rate, efficiency, or both.
 \item Avoid using log-log scaling on plot axes, which hides major
-  inefficiencies. If necessary repeat linear plots at different scales.
+  inefficiencies. If necessary, repeat linear plots at different scales.
 \item Rather than performing separate weak and strong scaling studies,
   incorporate them in one. Perform several strong scaling studies at
-  different scales. Then find an overall minimal practical cost per unit
-  and plot all the measurements together as demonstrated in the figures in
-  this paper.
+  different scales of data size. Then find an overall minimal practical
+  cost per unit and plot all the measurements together as demonstrated in
+  the figures in this paper.
 \end{packed_itemize}
 
 As architectures continue to advance, many are beginning to advocate
