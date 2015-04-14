@@ -459,7 +459,7 @@ size to unify the curve shape of the two plots, which is also replicated in
 Figure~\ref{fig:HabibTraditional} on the right. Again, both curves appear
 close to perfect.
 
-\begin{figure}[htb]
+\begin{figure}[b]
   \centering
   \includegraphics[width=.48\linewidth]{images/HabibTime}\quad
   \includegraphics[width=.48\linewidth]{images/HabibTimePerParticle}
@@ -470,17 +470,7 @@ close to perfect.
     scale. Both charts present the data in a way to suggest near perfect
     scaling for both scaling studies.}
   \label{fig:HabibTraditional}
-\end{figure}
-
-Figure~\ref{fig:HabibBetter} shows the same data using the rate and
-efficiency metrics advocated in this paper. The weak scaling is shown to
-diverge from ideal by a measurable fraction, which is to be expected when
-scaling over 3 orders of magnitude. The strong scaling study is shown to
-diverge very far from ideal, which is not at all apparent in the original
-charts.
-
-\begin{figure}[htb]
-  \centering
+  \vspace{1.5\baselineskip}
   \includegraphics[width=.48\linewidth]{images/HabibRate}\quad
   \includegraphics[width=.48\linewidth]{images/HabibEfficiency}
   \caption{Data from the Habib \etal\scite{Habib2013} Gordon Bell finalist
@@ -490,6 +480,13 @@ charts.
     Figure~\ref{fig:HabibTraditional}.}
   \label{fig:HabibBetter}
 \end{figure}
+
+Figure~\ref{fig:HabibBetter} shows the same data using the rate and
+efficiency metrics advocated in this paper. The weak scaling is shown to
+diverge from ideal by a measurable fraction, which is to be expected when
+scaling over 3 orders of magnitude. The strong scaling study is shown to
+diverge very far from ideal, which is not at all apparent in the original
+charts.
 
 %% Please note that it is not our intention to criticize the scaling shown by
 %% Habib \etal\scite{Habib2013}. On the contrary, they show HACC to be world
@@ -507,15 +504,7 @@ on its scalability. The study shows how transferring data between parallel
 jobs of different sizes can sometimes be faster than combining both in one
 large job.
 
-A traditional plot of the time of the visualization component shown in
-Figure~\ref{fig:OldfieldTraditional} gives curves that suggest good scaling
-performance. However, when we show the same data using the rate and
-efficiency metrics, shown in Figure~\ref{fig:OldfieldBetter}, we can
-clearly see the effect the communication overhead has on the scalability of
-the algorithm. Without such a presentation, erroneous interpretation of the
-performance is sure to occur.
-
-\begin{figure}[htb]
+\begin{figure}[b]
   \centering
   \includegraphics[width=.48\linewidth]{images/OldfieldTimeLinear}
   \includegraphics[width=.48\linewidth]{images/OldfieldTimeLog}
@@ -525,10 +514,7 @@ performance is sure to occur.
     traditional method of showing the trend of run time using linear and
     log-log scaling.}
   \label{fig:OldfieldTraditional}
-\end{figure}
-
-\begin{figure}
-  \centering
+  \vspace{1.5\baselineskip}
   \includegraphics[width=.48\linewidth]{images/OldfieldRate}\quad
   \includegraphics[width=.48\linewidth]{images/OldfieldEfficiency}
   \caption{Data from Oldfield \etal\scite{Oldfield2014} using
@@ -536,6 +522,14 @@ performance is sure to occur.
     overhead has a severe impact on the overall scalability.}
   \label{fig:OldfieldBetter}
 \end{figure}
+
+A traditional plot of the time of the visualization component shown in
+Figure~\ref{fig:OldfieldTraditional} gives curves that suggest good scaling
+performance. However, when we show the same data using the rate and
+efficiency metrics, shown in Figure~\ref{fig:OldfieldBetter}, we can
+clearly see the effect the communication overhead has on the scalability of
+the algorithm. Without such a presentation, erroneous interpretation of the
+performance is sure to occur.
 
 \section{Discussion}
 
