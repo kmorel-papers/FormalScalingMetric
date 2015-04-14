@@ -330,13 +330,13 @@ cost per unit is constant under any number of processing elements \emph{or}
 data sizes. Thus, given multiple strong scaling studies over data of
 different sizes, we can find the best cost per unit, $C_u^*$, that uses
 $p^*$ processing elements operating on data of size $n^*$. The best cost
-per unit is generally the minimum, but take care for outliers that are not
-representative of practical runs. For example, it is well known that a
-sufficiently small data size could fit in the cache of a sufficiently large
-parallel job\lcite{Gustafson1990}. An experiment of this nature would
-report a much lower cost per unit but would be of little relevance to the
-scale of problems run in practice and therefore should be disqualified as
-ideal.
+per unit is generally the minimum. We are not considering, however, outlier
+experiments where data sizes are not representative of practical runs. For
+example, it is well known that a sufficiently small data size could fit in
+the cache of a sufficiently large parallel job\lcite{Gustafson1990}. An
+experiment of this nature would report a much lower cost per unit but would
+be of little relevance to the scale of problems run in practice and
+therefore should be disqualified from ideal.
 
 With this best
 cost per unit we can adjust the efficiency to be comparable across all
